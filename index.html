@@ -35,10 +35,11 @@
             font-family: 'VT323', monospace;
             background: var(--darker-bg);
             color: var(--terminal-green);
-            overflow: auto;
+            overflow: hidden;
             cursor: none;
         }
 
+        /* Custom Cursor */
         .cursor {
             position: fixed;
             width: 20px;
@@ -61,6 +62,7 @@
             z-index: 10001;
         }
 
+        /* CRT Screen Effect */
         .crt-overlay {
             position: fixed;
             inset: 0;
@@ -106,6 +108,7 @@
             }
         }
 
+        /* Vignette */
         .vignette {
             position: fixed;
             inset: 0;
@@ -114,6 +117,7 @@
             z-index: 9997;
         }
 
+        /* Boot Screen */
         .boot-screen {
             position: fixed;
             inset: 0;
@@ -184,6 +188,7 @@
             box-shadow: 0 0 20px var(--terminal-green);
         }
 
+        /* Desktop */
         .desktop {
             position: fixed;
             inset: 0;
@@ -195,6 +200,7 @@
             display: block;
         }
 
+        /* Desktop Background Grid */
         .grid-bg {
             position: absolute;
             inset: 0;
@@ -216,6 +222,7 @@
             }
         }
 
+        /* Taskbar */
         .taskbar {
             position: fixed;
             bottom: 0;
@@ -293,6 +300,7 @@
             text-shadow: 0 0 10px var(--terminal-green);
         }
 
+        /* Desktop Icons */
         .desktop-icons {
             position: absolute;
             top: 20px;
@@ -340,6 +348,7 @@
             text-shadow: 0 0 5px var(--terminal-green);
         }
 
+        /* Windows */
         .window {
             position: absolute;
             background: rgba(10, 14, 39, 0.95);
@@ -428,6 +437,7 @@
             color: var(--terminal-green);
         }
 
+        /* Custom Scrollbar */
         .window-content::-webkit-scrollbar {
             width: 12px;
         }
@@ -443,6 +453,7 @@
             box-shadow: 0 0 10px var(--terminal-green);
         }
 
+        /* Terminal Window */
         .terminal-output {
             font-family: 'Share Tech Mono', monospace;
             font-size: 1rem;
@@ -482,6 +493,7 @@
             color: var(--warning-red);
         }
 
+        /* About Window */
         .profile-section {
             display: grid;
             grid-template-columns: 200px 1fr;
@@ -524,6 +536,21 @@
         }
 
         .profile-photo {
+            /*
+            📸 IMAGE PLACEHOLDER #1 - YOUR PROFILE PHOTO
+            ----------------------------------------------
+            TYPE: Professional photo or portrait
+            DIMENSIONS: 400x400px (1:1 ratio, square)
+            BACKGROUND: Any background works - will be contained in frame
+            STYLE: Professional headshot, good lighting, facing camera
+            FILE FORMAT: PNG or JPG
+            
+            To add your photo:
+            1. Save your photo as 'profile.jpg' or 'profile.png'
+            2. Create a folder called 'images' next to this HTML file
+            3. Replace the background below with:
+               background: url('images/profile.png') center/cover no-repeat;
+            */
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, var(--terminal-green), var(--neon-blue));
@@ -603,7 +630,7 @@
             margin-top: 5px;
         }
 
-
+        /* Projects Window */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -685,7 +712,7 @@
             box-shadow: 0 0 15px var(--neon-blue);
         }
 
-
+        /* Skills Window */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -735,7 +762,7 @@
             border-bottom-color: var(--neon-blue);
         }
 
-
+        /* Experience Window */
         .timeline {
             position: relative;
             padding-left: 40px;
@@ -797,7 +824,7 @@
             list-style-position: inside;
         }
 
-
+        /* Contact Window */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -844,7 +871,7 @@
             word-break: break-all;
         }
 
-
+        /* Start Menu */
         .start-menu {
             position: fixed;
             bottom: 70px;
@@ -926,7 +953,7 @@
             font-size: 1rem;
         }
 
-
+        /* Glitch Effect */
         .glitch {
             position: relative;
             animation: glitch-animation 5s infinite;
@@ -957,7 +984,7 @@
             }
         }
 
-
+        /* Matrix Rain Background */
         #matrix-canvas {
             position: fixed;
             top: 0;
@@ -969,7 +996,7 @@
             pointer-events: none;
         }
 
-
+        /* Responsive */
         @media (max-width: 768px) {
             .desktop-icons {
                 grid-template-columns: repeat(auto-fill, 100px);
@@ -1006,6 +1033,7 @@
             }
         }
 
+        /* Loading Animation */
         .loading {
             animation: pulse 2s ease-in-out infinite;
         }
@@ -1032,6 +1060,7 @@
     <div class="vignette"></div>
     <canvas id="matrix-canvas"></canvas>
 
+    <!-- Boot Screen -->
     <div class="boot-screen">
         <div class="boot-text">
             <div id="boot-lines"></div>
@@ -1042,9 +1071,11 @@
         </div>
     </div>
 
+    <!-- Desktop -->
     <div class="desktop">
         <div class="grid-bg"></div>
 
+        <!-- Desktop Icons -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-window="about">
                 <div class="icon-image">👤</div>
@@ -1072,9 +1103,13 @@
             </div>
         </div>
 
+        <!-- About Window -->
         <div class="window" id="about-window" style="top: 10%; left: 10%; width: 70%; height: 75%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>👤</span><span>About_Me.exe</span></div>
+                <div class="window-title">
+                    <span>👤</span>
+                    <span>About_Me.exe</span>
+                </div>
                 <div class="window-controls">
                     <button class="window-btn minimize-btn">_</button>
                     <button class="window-btn maximize-btn">□</button>
@@ -1083,6 +1118,7 @@
             </div>
             <div class="window-content">
                 <div class="profile-section">
+                    <!-- #file:myprofile.jpg -->
                     <div class="profile-photo-container">
                         <div class="profile-photo">
                             <img src="myprofile.jpg" alt="SIDI MOHAMED SID AMINE" class="profile-photo-img">
@@ -1119,11 +1155,18 @@
             </div>
         </div>
 
+        <!-- Projects Window -->
         <div class="window" id="projects-window" style="top: 8%; left: 15%; width: 75%; height: 80%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>💻</span><span>Projects.exe</span></div>
-                <div class="window-controls"><button class="window-btn minimize-btn">_</button><button
-                        class="window-btn maximize-btn">□</button><button class="window-btn close-btn">✕</button></div>
+                <div class="window-title">
+                    <span>💻</span>
+                    <span>Projects.exe</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">□</button>
+                    <button class="window-btn close-btn">✕</button>
+                </div>
             </div>
             <div class="window-content">
                 <div class="project-grid">
@@ -1133,8 +1176,11 @@
                         <div class="project-desc">Real-time recipe platform with role-based access control. Features
                             cloud-stored content, secure authentication, and seamless management across admin,
                             contributor, and user roles.</div>
-                        <div class="tech-tags"><span class="tech-tag">Flutter</span><span
-                                class="tech-tag">Supabase</span><span class="tech-tag">Real-time DB</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">Real-time DB</span>
+                        </div>
                     </div>
                     <div class="project-card">
                         <div class="project-title">GenAI Accounting Platform</div>
@@ -1142,8 +1188,12 @@
                         <div class="project-desc">OCR-driven automated bookkeeping system powered by AWS Bedrock.
                             Delivers predictive insights and intelligent document processing for financial workflows.
                         </div>
-                        <div class="tech-tags"><span class="tech-tag">React</span><span class="tech-tag">AWS
-                                Bedrock</span><span class="tech-tag">OCR</span><span class="tech-tag">ML</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">AWS Bedrock</span>
+                            <span class="tech-tag">OCR</span>
+                            <span class="tech-tag">ML</span>
+                        </div>
                     </div>
                     <div class="project-card">
                         <div class="project-title">EasyKaps</div>
@@ -1151,42 +1201,61 @@
                         <div class="project-desc">Award-winning customizable shortcut keyboard. 1st Runner-up at APU
                             Startup Competition for revolutionizing productivity workflows with hardware + software
                             innovation.</div>
-                        <div class="tech-tags"><span class="tech-tag">Hardware</span><span
-                                class="tech-tag">IoT</span><span class="tech-tag">Embedded</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Hardware</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Embedded</span>
+                        </div>
                     </div>
                     <div class="project-card">
                         <div class="project-title">Clarify</div>
                         <div class="project-date">[SEPT 2025]</div>
                         <div class="project-desc">Educational web platform for community knowledge-sharing with
                             authentication and admin moderation. Facilitates collaborative learning.</div>
-                        <div class="tech-tags"><span class="tech-tag">ASP.NET</span><span class="tech-tag">SQL
-                                Server</span><span class="tech-tag">Auth</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ASP.NET</span>
+                            <span class="tech-tag">SQL Server</span>
+                            <span class="tech-tag">Auth</span>
+                        </div>
                     </div>
                     <div class="project-card">
                         <div class="project-title">Automated Purchase Order System</div>
                         <div class="project-date">[JUN 2025]</div>
                         <div class="project-desc">Enterprise-grade multi-role procurement system with secure validation
                             and approval workflows. Demonstrates advanced OOP and system design.</div>
-                        <div class="tech-tags"><span class="tech-tag">Java</span><span
-                                class="tech-tag">Swing</span><span class="tech-tag">OOP</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Swing</span>
+                            <span class="tech-tag">OOP</span>
+                        </div>
                     </div>
                     <div class="project-card">
                         <div class="project-title">Job Matching System</div>
                         <div class="project-date">[OCT 2025]</div>
                         <div class="project-desc">High-performance candidate-vacancy pairing engine using optimized data
                             structures and algorithms for efficient matching.</div>
-                        <div class="tech-tags"><span class="tech-tag">C++</span><span class="tech-tag">Data
-                                Structures</span><span class="tech-tag">Algorithms</span></div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Data Structures</span>
+                            <span class="tech-tag">Algorithms</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Skills Window -->
         <div class="window" id="skills-window" style="top: 12%; left: 18%; width: 70%; height: 70%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>⚡</span><span>Skills.exe</span></div>
-                <div class="window-controls"><button class="window-btn minimize-btn">_</button><button
-                        class="window-btn maximize-btn">□</button><button class="window-btn close-btn">✕</button></div>
+                <div class="window-title">
+                    <span>⚡</span>
+                    <span>Skills.exe</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">□</button>
+                    <button class="window-btn close-btn">✕</button>
+                </div>
             </div>
             <div class="window-content">
                 <div class="skills-grid">
@@ -1235,11 +1304,18 @@
             </div>
         </div>
 
+        <!-- Experience Window -->
         <div class="window" id="experience-window" style="top: 10%; left: 20%; width: 65%; height: 70%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>🏢</span><span>Experience.exe</span></div>
-                <div class="window-controls"><button class="window-btn minimize-btn">_</button><button
-                        class="window-btn maximize-btn">□</button><button class="window-btn close-btn">✕</button></div>
+                <div class="window-title">
+                    <span>🏢</span>
+                    <span>Experience.exe</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">□</button>
+                    <button class="window-btn close-btn">✕</button>
+                </div>
             </div>
             <div class="window-content">
                 <div class="timeline">
@@ -1275,11 +1351,18 @@
             </div>
         </div>
 
+        <!-- Contact Window -->
         <div class="window" id="contact-window" style="top: 15%; left: 25%; width: 55%; height: 60%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>📧</span><span>Contact.exe</span></div>
-                <div class="window-controls"><button class="window-btn minimize-btn">_</button><button
-                        class="window-btn maximize-btn">□</button><button class="window-btn close-btn">✕</button></div>
+                <div class="window-title">
+                    <span>📧</span>
+                    <span>Contact.exe</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">□</button>
+                    <button class="window-btn close-btn">✕</button>
+                </div>
             </div>
             <div class="window-content">
                 <h2
@@ -1299,17 +1382,25 @@
                         <div class="contact-label">GITHUB</div>
                         <div class="contact-value">github.com/sidim-prog</div>
                     </a>
+                    <!-- Phone removed for privacy -->
                 </div>
                 <p style="font-family: 'Share Tech Mono', monospace; margin-top: 30px; opacity: 0.7;">📍 Based in Seri
                     Kembangan, Selangor, Malaysia</p>
             </div>
         </div>
 
+        <!-- Terminal Window -->
         <div class="window" id="terminal-window" style="top: 5%; left: 5%; width: 80%; height: 85%;">
             <div class="window-titlebar">
-                <div class="window-title"><span>⌨️</span><span>Terminal.exe - Interactive Shell</span></div>
-                <div class="window-controls"><button class="window-btn minimize-btn">_</button><button
-                        class="window-btn maximize-btn">□</button><button class="window-btn close-btn">✕</button></div>
+                <div class="window-title">
+                    <span>⌨️</span>
+                    <span>Terminal.exe - Interactive Shell</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">□</button>
+                    <button class="window-btn close-btn">✕</button>
+                </div>
             </div>
             <div class="window-content">
                 <div class="terminal-output" id="terminal-output">
@@ -1317,11 +1408,14 @@
                     <div>Type 'help' for available commands</div>
                     <div style="margin: 20px 0;">==========================================</div>
                 </div>
-                <div class="terminal-input"><span class="terminal-prompt">root@sidi-os:~$</span><input type="text"
-                        id="terminal-input" autocomplete="off"></div>
+                <div class="terminal-input">
+                    <span class="terminal-prompt">root@sidi-os:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off">
+                </div>
             </div>
         </div>
 
+        <!-- Start Menu -->
         <div class="start-menu">
             <div class="start-menu-header">
                 <div class="start-menu-title">SIDI_OS</div>
@@ -1355,7 +1449,9 @@
             </div>
         </div>
 
-        <div class="taskbar"><button class="start-btn">START</button>
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <button class="start-btn">START</button>
             <div class="taskbar-separator"></div>
             <div class="taskbar-apps"></div>
             <div class="system-time"></div>
@@ -1363,7 +1459,9 @@
     </div>
 
     <script>
-
+        // ==========================================
+        // BOOT SEQUENCE
+        // ==========================================
         const bootMessages = [
             'INITIALIZING SIDI_OS v3.5...',
             'LOADING KERNEL MODULES...',
@@ -1420,7 +1518,9 @@
 
         bootSequence();
 
-
+        // ==========================================
+        // CUSTOM CURSOR
+        // ==========================================
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
         let mouseX = 0, mouseY = 0;
@@ -1447,7 +1547,9 @@
         }
         animateCursor();
 
-
+        // ==========================================
+        // MATRIX RAIN CANVAS
+        // ==========================================
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -1479,7 +1581,9 @@
 
         setInterval(drawMatrix, 35);
 
-
+        // ==========================================
+        // SYSTEM TIME
+        // ==========================================
         function updateTime() {
             const now = new Date();
             const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
@@ -1488,7 +1592,9 @@
         updateTime();
         setInterval(updateTime, 1000);
 
-
+        // ==========================================
+        // WINDOW MANAGEMENT
+        // ==========================================
         let activeWindow = null;
         let windowZ = 100;
 
@@ -1500,7 +1606,7 @@
             window.style.zIndex = ++windowZ;
             activeWindow = window;
 
-
+            // Add to taskbar
             const appName = window.querySelector('.window-title span:last-child').textContent;
             const taskbarApp = document.createElement('div');
             taskbarApp.className = 'taskbar-app active';
@@ -1520,7 +1626,7 @@
             };
             document.querySelector('.taskbar-apps').appendChild(taskbarApp);
 
-
+            // Animate window open
             gsap.from(window, {
                 scale: 0.5,
                 opacity: 0,
@@ -1529,7 +1635,7 @@
             });
         }
 
-
+        // Desktop icons
         document.querySelectorAll('.desktop-icon').forEach(icon => {
             icon.addEventListener('dblclick', () => {
                 const windowId = icon.dataset.window;
@@ -1537,7 +1643,7 @@
             });
         });
 
-
+        // Start menu items
         document.querySelectorAll('.start-menu-item').forEach(item => {
             item.addEventListener('click', () => {
                 const windowId = item.dataset.window;
@@ -1546,7 +1652,7 @@
             });
         });
 
-
+        // Window controls
         document.querySelectorAll('.window').forEach(window => {
             const closeBtn = window.querySelector('.close-btn');
             const minimizeBtn = window.querySelector('.minimize-btn');
@@ -1571,7 +1677,7 @@
                 window.classList.toggle('maximized');
             };
 
-
+            // Make windows draggable
             if (window.gsap && window.Draggable) {
                 Draggable.create(window, {
                     trigger: titlebar,
@@ -1583,12 +1689,12 @@
             }
         });
 
-
+        // Start menu toggle
         document.querySelector('.start-btn').addEventListener('click', () => {
             document.querySelector('.start-menu').classList.toggle('active');
         });
 
-
+        // Close start menu when clicking outside
         document.addEventListener('click', (e) => {
             const startMenu = document.querySelector('.start-menu');
             const startBtn = document.querySelector('.start-btn');
@@ -1597,7 +1703,9 @@
             }
         });
 
-
+        // ==========================================
+        // TERMINAL COMMANDS
+        // ==========================================
         const terminalInput = document.getElementById('terminal-input');
         const terminalOutput = document.getElementById('terminal-output');
 
@@ -1694,18 +1802,22 @@ Location: Seri Kembangan, Malaysia`,
             }
         });
 
-
+        // Auto-focus terminal when window is active
         document.getElementById('terminal-window').addEventListener('click', () => {
             terminalInput.focus();
         });
 
-
+        // ==========================================
+        // RESPONSIVE
+        // ==========================================
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-
+        // ==========================================
+        // EASTER EGG
+        // ==========================================
         let konamiCode = [];
         const konami = ['h', 'a', 'c', 'k', 'e', 'r'];
 
