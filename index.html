@@ -306,7 +306,7 @@
             top: 20px;
             left: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, 120px);
+            grid-template-columns: repeat(6, 120px);
             gap: 30px;
             padding: 20px;
         }
@@ -346,6 +346,18 @@
             font-size: 1rem;
             color: var(--terminal-green);
             text-shadow: 0 0 5px var(--terminal-green);
+        }
+
+        .icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .window-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
         }
 
         /* Windows */
@@ -946,6 +958,16 @@
 
         .start-menu-item-icon {
             font-size: 1.8rem;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .start-menu-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         .start-menu-item-text {
@@ -991,9 +1013,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.1;
+            opacity: 0.3;
             z-index: 0;
             pointer-events: none;
+        }
+
+        #matrix-canvas-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Hide the static grid background */
+        .grid-bg {
+            display: none;
         }
 
         /* Responsive */
@@ -1059,6 +1097,7 @@
     <div class="crt-flicker"></div>
     <div class="vignette"></div>
     <canvas id="matrix-canvas"></canvas>
+    <canvas id="matrix-canvas-2"></canvas>
 
     <!-- Boot Screen -->
     <div class="boot-screen">
@@ -1078,28 +1117,28 @@
         <!-- Desktop Icons -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-window="about">
-                <div class="icon-image">👤</div>
+                <div class="icon-image"><img src="about_me.png" alt="About Me" class="icon-img"></div>
                 <div class="icon-label">About_Me.exe</div>
             </div>
+            <div class="desktop-icon" data-window="terminal">
+                <div class="icon-image"><img src="terminal.png" alt="Terminal" class="icon-img"></div>
+                <div class="icon-label">Terminal.exe</div>
+            </div>
             <div class="desktop-icon" data-window="projects">
-                <div class="icon-image">💻</div>
+                <div class="icon-image"><img src="projects.png" alt="Projects" class="icon-img"></div>
                 <div class="icon-label">Projects.exe</div>
             </div>
             <div class="desktop-icon" data-window="skills">
-                <div class="icon-image">⚡</div>
+                <div class="icon-image"><img src="skills.png" alt="Skills" class="icon-img"></div>
                 <div class="icon-label">Skills.exe</div>
             </div>
             <div class="desktop-icon" data-window="experience">
-                <div class="icon-image">🏢</div>
+                <div class="icon-image"><img src="experiance.png" alt="Experience" class="icon-img"></div>
                 <div class="icon-label">Experience.exe</div>
             </div>
             <div class="desktop-icon" data-window="contact">
-                <div class="icon-image">📧</div>
+                <div class="icon-image"><img src="contact.png" alt="Contact" class="icon-img"></div>
                 <div class="icon-label">Contact.exe</div>
-            </div>
-            <div class="desktop-icon" data-window="terminal">
-                <div class="icon-image">⌨️</div>
-                <div class="icon-label">Terminal.exe</div>
             </div>
         </div>
 
@@ -1107,7 +1146,7 @@
         <div class="window" id="about-window" style="top: 10%; left: 10%; width: 70%; height: 75%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>👤</span>
+                    <span><img src="about_me.png" alt="About Me" class="window-icon"></span>
                     <span>About_Me.exe</span>
                 </div>
                 <div class="window-controls">
@@ -1159,7 +1198,7 @@
         <div class="window" id="projects-window" style="top: 8%; left: 15%; width: 75%; height: 80%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>💻</span>
+                    <span><img src="projects.png" alt="Projects" class="window-icon"></span>
                     <span>Projects.exe</span>
                 </div>
                 <div class="window-controls">
@@ -1248,7 +1287,7 @@
         <div class="window" id="skills-window" style="top: 12%; left: 18%; width: 70%; height: 70%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>⚡</span>
+                    <span><img src="skills.png" alt="Skills" class="window-icon"></span>
                     <span>Skills.exe</span>
                 </div>
                 <div class="window-controls">
@@ -1308,7 +1347,7 @@
         <div class="window" id="experience-window" style="top: 10%; left: 20%; width: 65%; height: 70%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>🏢</span>
+                    <span><img src="experiance.png" alt="Experience" class="window-icon"></span>
                     <span>Experience.exe</span>
                 </div>
                 <div class="window-controls">
@@ -1355,7 +1394,7 @@
         <div class="window" id="contact-window" style="top: 15%; left: 25%; width: 55%; height: 60%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>📧</span>
+                    <span><img src="contact.png" alt="Contact" class="window-icon"></span>
                     <span>Contact.exe</span>
                 </div>
                 <div class="window-controls">
@@ -1393,7 +1432,7 @@
         <div class="window" id="terminal-window" style="top: 5%; left: 5%; width: 80%; height: 85%;">
             <div class="window-titlebar">
                 <div class="window-title">
-                    <span>⌨️</span>
+                    <span><img src="terminal.png" alt="Terminal" class="window-icon"></span>
                     <span>Terminal.exe - Interactive Shell</span>
                 </div>
                 <div class="window-controls">
@@ -1423,27 +1462,32 @@
             </div>
             <div class="start-menu-items">
                 <div class="start-menu-item" data-window="about">
-                    <div class="start-menu-item-icon">👤</div>
+                    <div class="start-menu-item-icon"><img src="about_me.png" alt="About Me" class="start-menu-icon">
+                    </div>
                     <div class="start-menu-item-text">About Me</div>
                 </div>
                 <div class="start-menu-item" data-window="projects">
-                    <div class="start-menu-item-icon">💻</div>
+                    <div class="start-menu-item-icon"><img src="projects.png" alt="Projects" class="start-menu-icon">
+                    </div>
                     <div class="start-menu-item-text">Projects</div>
                 </div>
                 <div class="start-menu-item" data-window="skills">
-                    <div class="start-menu-item-icon">⚡</div>
+                    <div class="start-menu-item-icon"><img src="skills.png" alt="Skills" class="start-menu-icon"></div>
                     <div class="start-menu-item-text">Skills</div>
                 </div>
                 <div class="start-menu-item" data-window="experience">
-                    <div class="start-menu-item-icon">🏢</div>
+                    <div class="start-menu-item-icon"><img src="experiance.png" alt="Experience"
+                            class="start-menu-icon"></div>
                     <div class="start-menu-item-text">Experience</div>
                 </div>
                 <div class="start-menu-item" data-window="contact">
-                    <div class="start-menu-item-icon">📧</div>
+                    <div class="start-menu-item-icon"><img src="contact.png" alt="Contact" class="start-menu-icon">
+                    </div>
                     <div class="start-menu-item-text">Contact</div>
                 </div>
                 <div class="start-menu-item" data-window="terminal">
-                    <div class="start-menu-item-icon">⌨️</div>
+                    <div class="start-menu-item-icon"><img src="terminal.png" alt="Terminal" class="start-menu-icon">
+                    </div>
                     <div class="start-menu-item-text">Terminal</div>
                 </div>
             </div>
@@ -1548,7 +1592,7 @@
         animateCursor();
 
         // ==========================================
-        // MATRIX RAIN CANVAS
+        // MATRIX RAIN CANVAS - LAYER 1 (FAST, DENSE)
         // ==========================================
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
@@ -1579,7 +1623,40 @@
             }
         }
 
-        setInterval(drawMatrix, 35);
+        setInterval(drawMatrix, 30);
+
+        // ==========================================
+        // MATRIX RAIN CANVAS - LAYER 2 (SLOW, SPARSE)
+        // ==========================================
+        const canvas2 = document.getElementById('matrix-canvas-2');
+        const ctx2 = canvas2.getContext('2d');
+
+        canvas2.width = window.innerWidth;
+        canvas2.height = window.innerHeight;
+
+        const fontSize2 = 20;
+        const columns2 = canvas2.width / fontSize2;
+        const drops2 = Array(Math.floor(columns2)).fill(1);
+
+        function drawMatrix2() {
+            ctx2.fillStyle = 'rgba(5, 8, 17, 0.05)';
+            ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+
+            ctx2.fillStyle = '#00ff41';
+            ctx2.font = fontSize2 + 'px monospace';
+
+            for (let i = 0; i < drops2.length; i++) {
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                ctx2.fillText(text, i * fontSize2, drops2[i] * fontSize2);
+
+                if (drops2[i] * fontSize2 > canvas2.height && Math.random() > 0.975) {
+                    drops2[i] = 0;
+                }
+                drops2[i]++;
+            }
+        }
+
+        setInterval(drawMatrix2, 80);
 
         // ==========================================
         // SYSTEM TIME
@@ -1637,7 +1714,7 @@
 
         // Desktop icons
         document.querySelectorAll('.desktop-icon').forEach(icon => {
-            icon.addEventListener('dblclick', () => {
+            icon.addEventListener('click', () => {
                 const windowId = icon.dataset.window;
                 openWindow(windowId);
             });
@@ -1710,54 +1787,15 @@
         const terminalOutput = document.getElementById('terminal-output');
 
         const commands = {
-            help: `Available commands:
-    help       - Show this help message
-    about      - Display information about Sidi
-    projects   - List all projects
-    skills     - Show technical skills
-    contact    - Display contact information
-    clear      - Clear terminal screen
-    github     - Open GitHub profile
-    email      - Get email address
-    whoami     - Display current user
-    date       - Show current date and time
-    resume     - Download resume`,
+            help: `Available commands:\n    help       - Show this help message\n    about      - Display information about Sidi\n    projects   - List all projects\n    skills     - Show technical skills\n    contact    - Display contact information\n    clear      - Clear terminal screen\n    github     - Open GitHub profile\n    email      - Get email address\n    whoami     - Display current user\n    date       - Show current date and time`,
 
-            about: `SIDI MOHAMED SID AMINE
-==========================================
-Computer Science Student @ Asia Pacific University
-GPA: 3.5 | Expected Graduation: 2027
-Location: Seri Kembangan, Malaysia
+            about: `SIDI MOHAMED SID AMINE\n==========================================\nComputer Science Student @ Asia Pacific University\nGPA: 3.5 | Expected Graduation: 2027\nLocation: Seri Kembangan, Malaysia\n\nAchievements:\n• 1st Runner-up - APU Startup Competition (EasyKaps)\n• Top 10 Finalist - Mauritania Physics Olympiad\n\nCurrent Role:\nWeb Dev & Database Manager @ BarqSec (Startup)`,
 
-Achievements:
-• 1st Runner-up - APU Startup Competition (EasyKaps)
-• Top 10 Finalist - Mauritania Physics Olympiad
+            projects: `PROJECTS:\n==========================================\n1. CookSmart - Recipe platform (Flutter + Supabase)\n2. GenAI Accounting - AI bookkeeping (React + AWS Bedrock)\n3. EasyKaps - Hardware keyboard (IoT + Embedded)\n4. Clarify - Educational platform (ASP.NET + SQL)\n5. Purchase Order System - Enterprise app (Java)\n6. Job Matching System - Algorithms (C++)`,
 
-Current Role:
-Web Dev & Database Manager @ BarqSec (Startup)`,
+            skills: `TECHNICAL SKILLS:\n==========================================\nLanguages: Java, Python, C/C++, R, SQL, JavaScript\nFrameworks: Flutter, React, ASP.NET\nCloud: AWS (EC2, S3, IAM, Bedrock)\nTools: Git, PostgreSQL, Linux, SAP ERP\nOther: System Design, Algorithms, Data Structures`,
 
-            projects: `PROJECTS:
-==========================================
-1. CookSmart - Recipe platform (Flutter + Supabase)
-2. GenAI Accounting - AI bookkeeping (React + AWS Bedrock)
-3. EasyKaps - Hardware keyboard (IoT + Embedded)
-4. Clarify - Educational platform (ASP.NET + SQL)
-5. Purchase Order System - Enterprise app (Java)
-6. Job Matching System - Algorithms (C++)`,
-
-            skills: `TECHNICAL SKILLS:
-==========================================
-Languages: Java, Python, C/C++, R, SQL, JavaScript
-Frameworks: Flutter, React, ASP.NET
-Cloud: AWS (EC2, S3, IAM, Bedrock)
-Tools: Git, PostgreSQL, Linux, SAP ERP
-Other: System Design, Algorithms, Data Structures`,
-
-            contact: `CONTACT INFORMATION:
-==========================================
-Email: sidimuhamed904@gmail.com
-GitHub: github.com/sidim-prog
-Location: Seri Kembangan, Malaysia`,
+            contact: `CONTACT INFORMATION:\n==========================================\nEmail: sidimuhamed904@gmail.com\nGitHub: github.com/sidim-prog\nLocation: Seri Kembangan, Malaysia`,
 
             whoami: 'sidi_mohamed // CS_STUDENT // CODE_ARCHITECT',
 
@@ -1775,9 +1813,7 @@ Location: Seri Kembangan, Malaysia`,
                 <div>Type 'help' for available commands</div>
                 <div style="margin: 20px 0;">==========================================</div>`;
                 return '';
-            },
-
-            resume: 'Resume download feature not implemented yet. Contact me directly!'
+            }
         };
 
         terminalInput.addEventListener('keypress', (e) => {
@@ -1790,7 +1826,10 @@ Location: Seri Kembangan, Malaysia`,
 
                 if (command in commands) {
                     const result = typeof commands[command] === 'function' ? commands[command]() : commands[command];
-                    if (result) output.innerHTML += `<div style="margin-top: 10px;">${result}</div>`;
+                    if (result) {
+                        const resultHTML = result.replace(/\n/g, '<br>');
+                        output.innerHTML += `<div style="margin-top: 10px; white-space: pre-wrap;">${resultHTML}</div>`;
+                    }
                 } else if (command) {
                     output.classList.add('error');
                     output.innerHTML += `<div style="margin-top: 10px;">Command not found: ${command}. Type 'help' for available commands.</div>`;
@@ -1813,6 +1852,8 @@ Location: Seri Kembangan, Malaysia`,
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            canvas2.width = window.innerWidth;
+            canvas2.height = window.innerHeight;
         });
 
         // ==========================================
