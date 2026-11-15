@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,25 +8,26 @@
 <meta property="og:title" content="Sidi Mohamed Sid Amine · Software engineer">
 <meta property="og:description" content="Full-stack products and applied AI tools, built in Kuala Lumpur.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://sidim-prog.github.io/protfolio/sidi.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f37d1'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='700' font-size='19' text-anchor='middle' fill='%23f1ede4'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Noto+Kufi+Arabic:wght@400..900&family=Noto+Naskh+Arabic:wght@400..700&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #f1ede4;
-  --paper-2: #e8e3d7;
   --ink: #16140f;
   --muted: #6a6457;
   --accent: #1f37d1;
   --rule: 1px solid var(--ink);
   --hair: 1px solid rgba(22, 20, 15, .22);
-  --sans: "Archivo", "Arial Narrow", Arial, sans-serif;
-  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Archivo", "Noto Kufi Arabic", "Arial Narrow", Arial, sans-serif;
+  --serif: "Newsreader", "Noto Naskh Arabic", Georgia, "Times New Roman", serif;
   --pad: clamp(16px, 3.2vw, 48px);
+  --name-mt: clamp(10px, 2vw, 28px);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--paper);
@@ -41,13 +42,12 @@ body {
 ::selection { background: var(--accent); color: var(--paper); }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 a:hover { color: var(--accent); }
-a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+a:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 p { margin: 0 0 .9em; }
 p:last-child { margin-bottom: 0; }
 
 .wrap { max-width: 1560px; margin: 0 auto; padding: 0 var(--pad); container-type: inline-size; }
 
-/* small sans label used across the page */
 .label {
   font-family: var(--sans);
   font-size: 11.5px;
@@ -60,7 +60,7 @@ p:last-child { margin-bottom: 0; }
 
 /* ── top bar ───────────────────────────────── */
 .bar {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 18px;
   padding: 16px 0 14px;
   border-bottom: var(--rule);
 }
@@ -68,10 +68,19 @@ p:last-child { margin-bottom: 0; }
 .bar a { text-decoration: none; }
 .bar .clock { font-variant-numeric: tabular-nums; }
 .bar .cv { color: var(--accent); }
+.langs { display: flex; gap: 2px; }
+.langs button {
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--muted);
+  background: none; border: 0; padding: 2px 7px; cursor: pointer; border-radius: 0;
+}
+.langs button:hover { color: var(--accent); }
+.langs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.langs button[data-l="ar"] { font-family: "Noto Kufi Arabic", var(--sans); letter-spacing: 0; }
 
 /* ── hero ──────────────────────────────────── */
+.hero { position: relative; }
 .name {
-  margin: clamp(10px, 2vw, 28px) 0 0;
+  margin: var(--name-mt) 0 0;
   font-family: var(--sans);
   font-weight: 800;
   font-stretch: 62%;
@@ -81,19 +90,30 @@ p:last-child { margin-bottom: 0; }
   text-transform: uppercase;
 }
 .name span { display: block; white-space: nowrap; }
-.name-row { position: relative; }
-.name-aside { position: absolute; right: 0; bottom: .075em; display: flex; }
-.name-aside > span {
-  font-family: var(--sans); font-size: 15px; font-weight: 500; font-stretch: 100%; line-height: 1.35;
-  letter-spacing: .005em; text-transform: none; text-align: right; white-space: nowrap;
+
+.portrait {
+  position: absolute; z-index: 2;
+  inset-inline-end: 0;
+  top: calc(var(--name-mt) + var(--ns, 16.6cqw) * .905);
+  width: 21cqw; margin: 0;
 }
-.name-aside b { color: var(--accent); font-weight: 600; }
+.portrait .ph { position: relative; background: var(--accent); overflow: hidden; }
+.portrait img {
+  display: block; width: 100%; height: auto; aspect-ratio: 5 / 6; object-fit: cover; object-position: 50% 0;
+  filter: grayscale(1) contrast(1.25) brightness(1.08);
+  mix-blend-mode: screen;
+}
+.portrait .ph::after { content: ""; position: absolute; inset: 0; background: var(--paper); mix-blend-mode: multiply; pointer-events: none; }
+.portrait:hover img { filter: none; mix-blend-mode: normal; }
+.portrait:hover .ph::after { opacity: 0; }
+.portrait figcaption { padding: 8px 10px 9px; background: var(--accent); color: var(--paper); line-height: 1.35; }
 
 .intro {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 24px;
   margin-top: clamp(22px, 3.2vw, 46px);
   padding-top: 16px;
   border-top: var(--rule);
+  min-height: 15cqw;
 }
 .intro > .label { grid-column: 1 / span 2; padding-top: .5em; }
 .intro .lede {
@@ -105,16 +125,23 @@ p:last-child { margin-bottom: 0; }
   text-wrap: pretty;
 }
 .intro .lede em { font-style: italic; color: var(--accent); }
-.facts { grid-column: 10 / span 3; margin: 0; padding-top: .35em; }
-.facts div { display: grid; grid-template-columns: 5.2em 1fr; gap: 10px; padding: 7px 0; border-bottom: var(--hair); font-size: 15.5px; line-height: 1.35; }
-.facts div:first-child { padding-top: 0; }
-.facts dt { padding-top: .22em; }
-.facts dd { margin: 0; }
+
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 24px; margin: clamp(30px, 4vw, 56px) 0 0; border-top: var(--rule); }
+.facts div { padding: 12px 0 0; }
+.facts dt { margin-bottom: 4px; }
+.facts dd { margin: 0; font-size: 18px; line-height: 1.32; max-width: 15em; }
+
+/* ── numbers band ──────────────────────────── */
+.band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: clamp(36px, 5vw, 72px); background: var(--accent); color: var(--paper); }
+.band div { padding: clamp(18px, 2.2cqw, 34px) clamp(16px, 1.8cqw, 28px) clamp(18px, 2cqw, 30px); border-inline-start: 1px solid rgba(241, 237, 228, .32); }
+.band div:first-child { border-inline-start: 0; }
+.band b { display: block; font-family: var(--sans); font-weight: 800; font-stretch: 62%; font-size: clamp(60px, 9cqw, 140px); line-height: .84; letter-spacing: -.01em; word-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.band span { display: block; margin-top: 12px; font-size: 18px; line-height: 1.3; max-width: 14em; }
 
 /* ── sections ──────────────────────────────── */
 section { margin-top: clamp(64px, 9vw, 140px); }
 .head {
-  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
   padding-bottom: 10px; border-bottom: var(--rule);
 }
 .head h2 {
@@ -123,7 +150,7 @@ section { margin-top: clamp(64px, 9vw, 140px); }
   font-size: clamp(40px, 6.2cqw, 96px); line-height: .9; letter-spacing: -.01em;
   text-transform: uppercase;
 }
-.head .label { padding-bottom: 6px; text-align: right; }
+.head .say { margin: 0; padding-bottom: 4px; max-width: 21em; text-align: end; font-style: italic; font-size: clamp(17px, 1.5cqw, 23px); line-height: 1.28; text-wrap: balance; }
 
 /* ── work index ────────────────────────────── */
 .work details { border-bottom: var(--rule); }
@@ -137,16 +164,14 @@ section { margin-top: clamp(64px, 9vw, 140px); }
 }
 .work summary::-webkit-details-marker { display: none; }
 .work .no, .work .yr { font-family: var(--sans); font-size: 12.5px; font-weight: 600; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
-.work .yr { text-align: right; }
+.work .yr { text-align: end; }
 .work .title {
   font-family: var(--sans); font-weight: 700; font-stretch: 78%;
   font-size: clamp(26px, 2.6cqw, 44px); line-height: 1; letter-spacing: -.012em;
 }
 .work .tag { font-size: 17px; line-height: 1.3; color: var(--muted); transition: color .2s ease; }
 .work .plus { justify-self: end; align-self: center; width: 15px; height: 15px; position: relative; }
-.work .plus::before, .work .plus::after {
-  content: ""; position: absolute; background: currentColor; transition: transform .3s ease;
-}
+.work .plus::before, .work .plus::after { content: ""; position: absolute; background: currentColor; transition: transform .3s ease; }
 .work .plus::before { left: 0; right: 0; top: 7px; height: 1.5px; }
 .work .plus::after { top: 0; bottom: 0; left: 7px; width: 1.5px; }
 .work details[open] .plus::after { transform: scaleY(0); }
@@ -159,13 +184,10 @@ section { margin-top: clamp(64px, 9vw, 140px); }
   transition: block-size .4s cubic-bezier(.2, .7, .2, 1), content-visibility .4s allow-discrete;
 }
 .work details[open]::details-content { block-size: auto; }
-.work .body {
-  display: grid; grid-template-columns: 3.2rem minmax(0, 1.05fr) minmax(0, 1fr); gap: 0 20px;
-  padding: 6px 0 34px;
-}
+.work .body { display: grid; grid-template-columns: 3.2rem minmax(0, 1.05fr) minmax(0, 1fr); gap: 0 20px; padding: 6px 0 34px; }
 .work .desc { grid-column: 2; max-width: 34em; text-wrap: pretty; }
 .work .meta { grid-column: 3; margin: 0; font-size: 16px; line-height: 1.4; }
-.work .meta div { display: grid; grid-template-columns: 5.4em 1fr; gap: 10px; padding: 8px 0; border-top: var(--hair); }
+.work .meta div { display: grid; grid-template-columns: 6.2em 1fr; gap: 10px; padding: 8px 0; border-top: var(--hair); }
 .work .meta div:first-child { border-top: 0; padding-top: 4px; }
 .work .meta dt { padding-top: .25em; }
 .work .meta dd { margin: 0; }
@@ -174,10 +196,7 @@ section { margin-top: clamp(64px, 9vw, 140px); }
 .work .aside-note a:hover { color: var(--accent); }
 
 /* ── experience ────────────────────────────── */
-.rows > div {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 24px;
-  padding: 20px 0 22px; border-bottom: var(--hair);
-}
+.rows > div { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 24px; padding: 20px 0 22px; border-bottom: var(--hair); }
 .rows > div:last-child { border-bottom: var(--rule); }
 .rows .when { grid-column: 1 / span 3; padding-top: .45em; font-variant-numeric: tabular-nums; }
 .rows .what { grid-column: 4 / span 4; }
@@ -185,22 +204,22 @@ section { margin-top: clamp(64px, 9vw, 140px); }
 .rows .what span { display: block; margin-top: 4px; font-style: italic; color: var(--muted); font-size: 17px; }
 .rows .how { grid-column: 8 / span 5; font-size: 17.5px; line-height: 1.45; text-wrap: pretty; }
 
-/* ── about / education / toolkit ───────────── */
+/* ── about ─────────────────────────────────── */
 .cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 24px; padding-top: 22px; }
 .cols > div:nth-child(1) { grid-column: 1 / span 5; }
 .cols > div:nth-child(2) { grid-column: 7 / span 6; }
 .cols h3 { margin: 0 0 12px; }
+.cols h3.stack-gap { margin-top: 44px; }
 .plain { margin: 0; padding: 0; list-style: none; }
 .plain li { padding: 11px 0; border-top: var(--hair); line-height: 1.38; }
 .plain li:first-child { border-top: var(--rule); }
 .plain strong { font-family: var(--sans); font-weight: 700; font-stretch: 85%; font-size: 1.02em; letter-spacing: -.005em; }
 .plain small { display: block; font-size: 16px; color: var(--muted); font-style: italic; }
 .kit { margin: 0; }
-.kit div { display: grid; grid-template-columns: 7em 1fr; gap: 12px; padding: 11px 0; border-top: var(--hair); line-height: 1.38; }
+.kit div { display: grid; grid-template-columns: 7.4em 1fr; gap: 12px; padding: 11px 0; border-top: var(--hair); line-height: 1.38; }
 .kit div:first-child { border-top: var(--rule); }
 .kit dt { padding-top: .3em; }
 .kit dd { margin: 0; }
-.cols h3.stack-gap { margin-top: 44px; }
 
 /* ── contact ───────────────────────────────── */
 .contact { border-top: var(--rule); padding-top: 18px; }
@@ -221,12 +240,38 @@ footer {
   color: var(--muted);
 }
 
+/* ── Arabic ────────────────────────────────── */
+:root[lang="ar"] body { line-height: 1.8; }
+:root[lang="ar"] .label { letter-spacing: 0; font-size: 13px; font-weight: 700; }
+:root[lang="ar"] .langs button { font-size: 11.5px; }
+:root[lang="ar"] em, :root[lang="ar"] small, :root[lang="ar"] .say, :root[lang="ar"] .rows .what span { font-style: normal; }
+:root[lang="ar"] .intro .lede { line-height: 1.6; letter-spacing: 0; font-size: clamp(20px, 1.3vw + 13px, 30px); }
+:root[lang="ar"] .intro .lede em { font-weight: 700; }
+:root[lang="ar"] .head h2 { line-height: 1.35; letter-spacing: 0; font-size: clamp(36px, 5cqw, 78px); }
+:root[lang="ar"] .head .say { line-height: 1.6; }
+:root[lang="ar"] .work .title, :root[lang="ar"] .rows .what h3 { line-height: 1.4; letter-spacing: 0; }
+:root[lang="ar"] .work .tag { line-height: 1.6; }
+:root[lang="ar"] .work .meta, :root[lang="ar"] .plain li, :root[lang="ar"] .kit div, :root[lang="ar"] .facts dd, :root[lang="ar"] .band span { line-height: 1.65; }
+:root[lang="ar"] .band b { line-height: 1.25; letter-spacing: 0; font-size: clamp(44px, 6.4cqw, 100px); }
+:root[lang="ar"] .contact .big { line-height: 1.35; letter-spacing: 0; font-size: 11cqw; }
+:root[dir="rtl"] .contact .big i { transform: scaleX(-1); }
+:root[dir="rtl"] .contact .big:hover i { transform: scaleX(-1) translate(.06em, -.06em); }
+
 /* ── small screens ─────────────────────────── */
 @media (max-width: 900px) {
-  .name .name-aside { display: none; }
-  .intro { display: block; }
+  .portrait { position: static; width: 60%; margin-top: 14px; }
+  .intro { display: block; min-height: 0; }
   .intro > .label { display: block; margin-bottom: 12px; padding-top: 0; }
-  .facts { margin-top: 28px; }
+  .facts { grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  .facts div { padding: 12px 0 14px; border-bottom: var(--hair); }
+  .facts dd { font-size: 16.5px; }
+  .band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  :root[lang="ar"] .band b { font-size: 34px; }
+  .band div:nth-child(3) { border-inline-start: 0; }
+  .band div:nth-child(n+3) { border-top: 1px solid rgba(241, 237, 228, .32); }
+  .band span { font-size: 16px; }
+  .head { display: block; }
+  .head .say { text-align: start; margin-top: 10px; max-width: none; }
   .work summary { grid-template-columns: 2.1rem minmax(0, 1fr) 1.4rem; gap: 0 10px; padding: 16px 0 14px; }
   .work .tag { grid-column: 2; grid-row: 2; margin-top: 6px; font-size: 16px; }
   .work .yr { display: none; }
@@ -239,7 +284,8 @@ footer {
   .cols { display: block; }
   .cols > div + div { margin-top: 44px; }
   .bar .hide-s { display: none; }
-  .head .label { display: none; }
+  .bar { gap: 8px 10px; flex-wrap: wrap; }
+  .bar nav { gap: 12px; }
 }
 @media (hover: hover) and (max-width: 900px) {
   .work summary:hover { padding-left: 8px; padding-right: 8px; }
@@ -248,68 +294,85 @@ footer {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
-@media print { .bar nav, .contact .big i { display: none; } }
+@media print { .bar nav, .langs, .contact .big i { display: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="wrap">
 
   <header class="bar label">
-    <span>Portfolio, 2026</span>
-    <span class="clock hide-s" id="clock" aria-label="Local time in Kuala Lumpur">Kuala Lumpur</span>
+    <span class="hide-s" data-i="bar">Portfolio, 2026</span>
+    <span class="clock hide-s" id="clock">Kuala Lumpur</span>
     <nav aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#about" class="hide-s">About</a>
-      <a href="#contact">Contact</a>
-      <a href="cv.pdf" class="cv">CV&nbsp;↓</a>
+      <a href="#work" data-i="nav.work">Work</a>
+      <a href="#experience" class="hide-s" data-i="nav.exp">Experience</a>
+      <a href="#about" class="hide-s" data-i="nav.about">About</a>
+      <a href="#contact" data-i="nav.contact">Contact</a>
+      <a href="cv.pdf" class="cv" data-i="nav.cv">CV&nbsp;↓</a>
     </nav>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-l="en" aria-pressed="true">EN</button>
+      <button type="button" data-l="fr" aria-pressed="false">FR</button>
+      <button type="button" data-l="ar" aria-pressed="false" lang="ar">عربي</button>
+    </div>
   </header>
 
   <main>
-    <h1 class="name" id="name" aria-label="Sidi Mohamed Sid Amine">
-      <span id="name-1">Sidi Mohamed</span>
-      <span class="name-row">
+    <div class="hero">
+      <h1 class="name" id="name" aria-label="Sidi Mohamed Sid Amine">
+        <span id="name-1">Sidi Mohamed</span>
         <span>Sid Amine</span>
-        <span class="name-aside" aria-hidden="true"><span>Software engineer<br>Full-stack &amp; applied AI<br><b>Kuala Lumpur, Malaysia</b></span></span>
-      </span>
-    </h1>
+      </h1>
 
-    <div class="intro">
-      <span class="label">Hello</span>
-      <p class="lede">I build web products end to end: the database and auth, the payments, the interface, the deploy. Lately that has meant a marketplace with on-chain provenance, an AI agent that reconciles bank statements, and <em>internal tools an insurance adjuster's office uses every day.</em></p>
-      <dl class="facts">
-        <div><dt class="label muted">Now</dt><dd>Web developer at BarqSec</dd></div>
-        <div><dt class="label muted">Studying</dt><dd>BSc Computer Science, APU × De Montfort, final year</dd></div>
-        <div><dt class="label muted">From</dt><dd>Mauritania, living in Kuala Lumpur</dd></div>
-        <div><dt class="label muted">Open to</dt><dd>Software engineering roles</dd></div>
-      </dl>
+      <figure class="portrait">
+        <div class="ph"><img src="sidi.jpg" width="520" height="650" alt="Portrait of Sidi Mohamed Sid Amine"></div>
+        <figcaption class="label" data-i="cap">Software engineer<br>Full-stack &amp; applied AI</figcaption>
+      </figure>
+
+      <div class="intro">
+        <span class="label" data-i="hello">Hello</span>
+        <p class="lede" data-i="lede">I build software that gets <em>used.</em> A cybersecurity startup hired me as its web developer in my second year of university. Since then I have delivered two internal systems to an insurance adjusting firm, a marketplace with on-chain provenance, and an AI agent that reconciles bank statements.</p>
+      </div>
+    </div>
+
+    <dl class="facts">
+      <div><dt class="label muted" data-i="f1k">Now</dt><dd data-i="f1v">Web developer at BarqSec</dd></div>
+      <div><dt class="label muted" data-i="f2k">Studying</dt><dd data-i="f2v">BSc Computer Science, APU × De Montfort, final year</dd></div>
+      <div><dt class="label muted" data-i="f3k">Based</dt><dd data-i="f3v">Kuala Lumpur, from Mauritania</dd></div>
+      <div><dt class="label muted" data-i="f4k">Open to</dt><dd data-i="f4v">Software engineering roles</dd></div>
+    </dl>
+
+    <div class="band">
+      <div><b>8</b><span data-i="b1">products built end to end since 2025</span></div>
+      <div><b>2</b><span data-i="b2">internal systems delivered to C.S. Tang Adjusters</span></div>
+      <div><b data-i="b3n">2nd</b><span data-i="b3">place at the APU Startup Competition, with EasyKaps</span></div>
+      <div><b data-i="b4n">Top 10</b><span data-i="b4">National Physics Olympiad, Mauritania</span></div>
     </div>
 
     <!-- ───────────── WORK ───────────── -->
     <section id="work" class="work">
       <div class="head">
-        <h2>Work</h2>
-        <span class="label muted">Eight projects<br>2025 to 2026</span>
+        <h2 data-i="work.h">Work</h2>
+        <p class="say" data-i="work.say">Client systems, my own products and hackathon builds. Eight of them, each one working.</p>
       </div>
 
       <details open>
         <summary>
           <span class="no">01</span>
           <span class="title">Aureon</span>
-          <span class="tag">Marketplace for authenticated luxury goods, with on-chain provenance</span>
+          <span class="tag" data-i="p1.tag">Marketplace for authenticated luxury goods, with on-chain provenance</span>
           <span class="yr">2026</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>A marketplace for watches, art and collectibles where buyers can trust what they are buying. Vetted sellers list items and get paid through Stripe Connect. Each listing can be minted as an ERC-721 “digital twin”, so its ownership history and authenticity check are recorded on Ethereum&nbsp;(Sepolia).</p>
-            <p>Buyers and sellers never touch a wallet: the server signs every on-chain write, and the app says so plainly when the chain is unreachable instead of faking success. Four roles, fourteen tables, row-level security on every one, and eighteen passing contract tests.</p>
+            <p data-i="p1.d1">A marketplace for watches, art and collectibles where buyers can trust what they are buying. Vetted sellers list items and get paid through Stripe Connect. Each listing can be minted as an ERC&#8209;721 “digital twin”, so its ownership history and authenticity check are recorded on Ethereum&nbsp;(Sepolia).</p>
+            <p data-i="p1.d2">Buyers and sellers never touch a wallet: the server signs every on-chain write, and the app says so plainly when the chain is unreachable instead of faking success. Four roles, fourteen tables, row-level security on every one, and eighteen passing contract tests.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">My part</dt><dd>Supabase schema and row-level security, authentication, deployment. Team of four at APU.</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Next.js 16, React 19, TypeScript, Supabase, Stripe Connect, Solidity, Hardhat</dd></div>
-            <div><dt class="label muted">See it</dt><dd><a href="https://aureon-omega-three.vercel.app/">Live site</a> · <a href="https://github.com/sidim-prog/Aureon">Source</a></dd></div>
+            <div><dt class="label muted" data-i="l.part">My part</dt><dd data-i="p1.part">Supabase schema and row-level security, authentication, deployment. Team of four at APU.</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Next.js 16, React 19, TypeScript, Supabase, Stripe Connect, Solidity, Hardhat</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd><a href="https://aureon-omega-three.vercel.app/" data-i="v.live">Live site</a> · <a href="https://github.com/sidim-prog/Aureon" data-i="v.src">Source</a></dd></div>
           </dl>
         </div>
       </details>
@@ -318,19 +381,19 @@ footer {
         <summary>
           <span class="no">02</span>
           <span class="title">LedgerLens</span>
-          <span class="tag">An AI agent that reconciles cross-border payments, and shows its working</span>
+          <span class="tag" data-i="p2.tag">An AI agent that reconciles cross-border payments, and shows its working</span>
           <span class="yr">2026</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>A payment proof for USD 10,000 can show up on a Malaysian bank statement as RM&nbsp;46,802 three days later, after conversion, bank margin and fees. LedgerLens matches the two anyway. It reasons about exchange rates, fee models, settlement drift and invoice references, and flags a row as uncertain instead of forcing a bad match.</p>
-            <p>The matching engine is deterministic and runs offline; only the rows it cannot settle are escalated to Claude through seven MCP tools. Money is handled as decimals throughout. Around 160 tests, including seven engineered trap cases.</p>
+            <p data-i="p2.d1">A payment proof for USD 10,000 can show up on a Malaysian bank statement as RM&nbsp;46,802 three days later, after conversion, bank margin and fees. LedgerLens matches the two anyway. It reasons about exchange rates, fee models, settlement drift and invoice references, and flags a row as uncertain instead of forcing a bad match.</p>
+            <p data-i="p2.d2">The matching engine is deterministic and runs offline; only the rows it cannot settle are escalated to Claude through seven MCP tools. Money is handled as decimals throughout. Around 160 tests, including seven engineered trap cases.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Context</dt><dd>Built for an AI hackathon, for Malaysian SMEs.</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Python, FastAPI, Pydantic, Claude, Model Context Protocol, pytest, React 19, TypeScript</dd></div>
-            <div><dt class="label muted">See it</dt><dd><a href="https://github.com/sidim-prog/ai-marathon">Source</a></dd></div>
+            <div><dt class="label muted" data-i="l.ctx">Context</dt><dd data-i="p2.ctx">Built for an AI hackathon, for Malaysian SMEs.</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Python, FastAPI, Pydantic, Claude, Model Context Protocol, pytest, React 19, TypeScript</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd><a href="https://github.com/sidim-prog/ai-marathon" data-i="v.src">Source</a></dd></div>
           </dl>
         </div>
       </details>
@@ -339,19 +402,19 @@ footer {
         <summary>
           <span class="no">03</span>
           <span class="title">NajmUni</span>
-          <span class="tag">Study, money and paperwork in one place, for international students in Malaysia</span>
+          <span class="tag" data-i="p3.tag">Study, money and paperwork in one place, for international students in Malaysia</span>
           <span class="yr">2026</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>International students here juggle deadlines, a budget in a foreign currency, and visa papers that expire. NajmUni puts the three together and tells you what to do next. It runs in English and Arabic, right-to-left included.</p>
-            <p>It reads uploaded documents and bank statements, drafts the emails you would otherwise put off, and sends a weekly review. Every outside service is optional: with no keys at all it falls back to an embedded database and local sign-in, so the whole product runs on a laptop.</p>
+            <p data-i="p3.d1">International students here juggle deadlines, a budget in a foreign currency, and visa papers that expire. NajmUni puts the three together and tells you what to do next. It runs in English and Arabic, right-to-left included.</p>
+            <p data-i="p3.d2">It reads uploaded documents and bank statements, drafts the emails you would otherwise put off, and sends a weekly review. Every outside service is optional: with no keys at all it falls back to an embedded database and local sign-in, so the whole product runs on a laptop.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Status</dt><dd>In development. I started it because I am one of those students.</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Next.js, TypeScript, Supabase, PGlite, Claude, Playwright with axe accessibility checks</dd></div>
-            <div><dt class="label muted">See it</dt><dd>Private repository</dd></div>
+            <div><dt class="label muted" data-i="l.status">Status</dt><dd data-i="p3.status">In development. I started it because I am one of those students.</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Next.js, TypeScript, Supabase, PGlite, Claude, Playwright, axe</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd data-i="v.priv">Private repository</dd></div>
           </dl>
         </div>
       </details>
@@ -359,20 +422,20 @@ footer {
       <details>
         <summary>
           <span class="no">04</span>
-          <span class="title">Claims Management System</span>
-          <span class="tag">The internal claims tool at C.S. Tang Adjusters</span>
+          <span class="title" data-i="p4.t">Claims Management System</span>
+          <span class="tag" data-i="p4.tag">The internal claims tool at C.S. Tang Adjusters</span>
           <span class="yr">2026</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>An internal system for a motor insurance adjusting firm. Staff sign in, see the state of every open claim on a dashboard, search and filter the full list by state, insurer or adjuster, and export what they find to Excel.</p>
-            <p>New claims go in through a three-step form: claim, vehicle, first assessment. Each case has tabs for financials and documents, with one-click copying of the office network path where the files live.</p>
+            <p data-i="p4.d1">An internal system for a motor insurance adjusting firm. Staff sign in, see the state of every open claim on a dashboard, search and filter the full list by state, insurer or adjuster, and export what they find to Excel.</p>
+            <p data-i="p4.d2">New claims go in through a three-step form: claim, vehicle, first assessment. Each case has tabs for financials and documents, with one-click copying of the office network path where the files live.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Context</dt><dd>Built during my software engineering internship.</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>React, Vite, Tailwind CSS, Supabase, TanStack Query, Recharts</dd></div>
-            <div><dt class="label muted">See it</dt><dd>Client work, private</dd></div>
+            <div><dt class="label muted" data-i="l.ctx">Context</dt><dd data-i="p4.ctx">Built during my software engineering internship.</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>React, Vite, Tailwind CSS, Supabase, TanStack Query, Recharts</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd data-i="v.client">Client work, private</dd></div>
           </dl>
         </div>
       </details>
@@ -381,19 +444,19 @@ footer {
         <summary>
           <span class="no">05</span>
           <span class="title">CST Insights</span>
-          <span class="tag">Six years of claims data, collected, cleaned and made readable</span>
+          <span class="tag" data-i="p5.tag">Six years of claims data, collected, cleaned and made readable</span>
           <span class="yr">2026</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>The analytics side of the same office. A Python pipeline collects claims records with Playwright, cleans them, and loads them into Supabase. A dashboard sits on top: claims from 2021 to 2026, panel repairer performance, and dealer price lists for motorcycle parts.</p>
-            <p>Staff can also upload a spreadsheet and ask questions of it in plain language.</p>
+            <p data-i="p5.d1">The analytics side of the same office. A Python pipeline collects claims records with Playwright, cleans them, and loads them into Supabase. A dashboard sits on top: claims from 2021 to 2026, panel repairer performance, and dealer price lists for motorcycle parts.</p>
+            <p data-i="p5.d2">Staff can also upload a spreadsheet and ask questions of it in plain language.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Context</dt><dd>Second project from the C.S. Tang internship.</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Python, Playwright, Supabase, Vercel</dd></div>
-            <div><dt class="label muted">See it</dt><dd>Client work, private</dd></div>
+            <div><dt class="label muted" data-i="l.ctx">Context</dt><dd data-i="p5.ctx">Second project from the C.S. Tang internship.</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Python, Playwright, Supabase, Vercel</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd data-i="v.client">Client work, private</dd></div>
           </dl>
         </div>
       </details>
@@ -402,18 +465,18 @@ footer {
         <summary>
           <span class="no">06</span>
           <span class="title">BarqSec</span>
-          <span class="tag">Website for a cybersecurity startup</span>
-          <span class="yr">2025 →</span>
+          <span class="tag" data-i="p6.tag">Website for a cybersecurity startup</span>
+          <span class="yr">2025 –</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>My current job. I build and maintain BarqSec's website and web interfaces, and look after the database behind the platform.</p>
+            <p data-i="p6.d1">My current job. I build and maintain BarqSec's website and web interfaces, and look after the database behind the platform.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Role</dt><dd>Web developer</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Next.js, TypeScript, Tailwind CSS</dd></div>
-            <div><dt class="label muted">See it</dt><dd>Private repository</dd></div>
+            <div><dt class="label muted" data-i="l.role">Role</dt><dd data-i="p6.role">Web developer</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Next.js, TypeScript, Tailwind CSS</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd data-i="v.priv">Private repository</dd></div>
           </dl>
         </div>
       </details>
@@ -422,18 +485,18 @@ footer {
         <summary>
           <span class="no">07</span>
           <span class="title">CVE Visualizer</span>
-          <span class="tag">Security vulnerabilities, charted overnight at Nuit de l'Info</span>
+          <span class="tag" data-i="p7.tag">Security vulnerabilities, charted overnight at Nuit de l'Info</span>
           <span class="yr">2025</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>Nuit de l'Info is a French coding night that runs from sunset to sunrise. The entry pulls published CVE records from a public API and turns them into something you can browse and read at a glance.</p>
+            <p data-i="p7.d1">Nuit de l'Info is a French coding night that runs from sunset to sunrise. The entry pulls published CVE records from a public API and turns them into something you can browse and read at a glance.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Context</dt><dd>Overnight hackathon</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>React, Vite, JavaScript</dd></div>
-            <div><dt class="label muted">See it</dt><dd><a href="https://github.com/sidim-prog/nuit_de_l-info">Source</a></dd></div>
+            <div><dt class="label muted" data-i="l.ctx">Context</dt><dd data-i="p7.ctx">Overnight hackathon</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>React, Vite, JavaScript</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd><a href="https://github.com/sidim-prog/nuit_de_l-info" data-i="v.src">Source</a></dd></div>
           </dl>
         </div>
       </details>
@@ -441,47 +504,47 @@ footer {
       <details>
         <summary>
           <span class="no">08</span>
-          <span class="title">OWSB Purchase Orders</span>
-          <span class="tag">A multi-role procurement desktop system in Java</span>
+          <span class="title" data-i="p8.t">OWSB Purchase Orders</span>
+          <span class="tag" data-i="p8.tag">A multi-role procurement desktop system in Java</span>
           <span class="yr">2025</span>
           <span class="plus" aria-hidden="true"></span>
         </summary>
         <div class="body">
           <div class="desc">
-            <p>Purchase requisitions, purchase orders, suppliers, inventory and sales reports for a wholesale business, with a separate view and set of permissions for each role and an approval step before an order goes out. The project where object-oriented design stopped being theory for me.</p>
+            <p data-i="p8.d1">Purchase requisitions, purchase orders, suppliers, inventory and sales reports for a wholesale business, with a separate view and set of permissions for each role and an approval step before an order goes out. The project where object-oriented design stopped being theory for me.</p>
           </div>
           <dl class="meta">
-            <div><dt class="label muted">Context</dt><dd>University project, APU</dd></div>
-            <div><dt class="label muted">Built with</dt><dd>Java, Swing</dd></div>
-            <div><dt class="label muted">See it</dt><dd><a href="https://github.com/sidim-prog/OWSBSystem1">Source</a></dd></div>
+            <div><dt class="label muted" data-i="l.ctx">Context</dt><dd data-i="p8.ctx">University project, APU</dd></div>
+            <div><dt class="label muted" data-i="l.built">Built with</dt><dd>Java, Swing</dd></div>
+            <div><dt class="label muted" data-i="l.see">See it</dt><dd><a href="https://github.com/sidim-prog/OWSBSystem1" data-i="v.src">Source</a></dd></div>
           </dl>
         </div>
       </details>
 
-      <p class="aside-note">Also, for fun: <a href="https://github.com/sidim-prog/gamenight">The Last Masquerade</a>, a zero-dependency Node server that deals each guest at a murder-mystery party a secret character when they scan a QR code.</p>
+      <p class="aside-note" data-i="fun">Also, for fun: <a href="https://github.com/sidim-prog/gamenight">The Last Masquerade</a>, a zero-dependency Node server that deals each guest at a murder-mystery party a secret character when they scan a QR code.</p>
     </section>
 
     <!-- ───────────── EXPERIENCE ───────────── -->
     <section id="experience">
       <div class="head">
-        <h2>Experience</h2>
-        <span class="label muted">Kuala Lumpur</span>
+        <h2 data-i="exp.h">Experience</h2>
+        <p class="say" data-i="exp.say">Working as a developer since my second year of university.</p>
       </div>
       <div class="rows">
         <div>
-          <span class="when label">Nov 2025 to now</span>
-          <div class="what"><h3>Web Developer</h3><span>BarqSec</span></div>
-          <p class="how">Building the website and web interfaces for a cybersecurity startup in Next.js and TypeScript, and managing the database behind the platform.</p>
+          <span class="when label" data-i="e1.when">Nov 2025 to now</span>
+          <div class="what"><h3 data-i="e1.t">Web Developer</h3><span>BarqSec</span></div>
+          <p class="how" data-i="e1.d">Building the website and web interfaces for a cybersecurity startup in Next.js and TypeScript, and managing the database behind the platform.</p>
         </div>
         <div>
-          <span class="when label">Jan to Apr 2026</span>
-          <div class="what"><h3>Software Engineer, Intern</h3><span>C.S. Tang Adjusters Sdn. Bhd.</span></div>
-          <p class="how">Built the firm's internal claims management system, then a data pipeline and dashboard covering six years of claims, repairer performance and parts pricing.</p>
+          <span class="when label" data-i="e2.when">Jan to Apr 2026</span>
+          <div class="what"><h3 data-i="e2.t">Software Engineer, Intern</h3><span>C.S. Tang Adjusters Sdn. Bhd.</span></div>
+          <p class="how" data-i="e2.d">Built the firm's internal claims management system, then a data pipeline and dashboard covering six years of claims, repairer performance and parts pricing.</p>
         </div>
         <div>
-          <span class="when label">Jul 2024 to Jan 2026</span>
-          <div class="what"><h3>Mathematics Tutor</h3><span>Asia Pacific University</span></div>
-          <p class="how">Ran problem-solving sessions in calculus and algebra for fellow undergraduates. Good practice at explaining a hard thing three different ways.</p>
+          <span class="when label" data-i="e3.when">Jul 2024 to Jan 2026</span>
+          <div class="what"><h3 data-i="e3.t">Mathematics Tutor</h3><span>Asia Pacific University</span></div>
+          <p class="how" data-i="e3.d">Ran problem-solving sessions in calculus and algebra for fellow undergraduates. Good practice at explaining a hard thing three different ways.</p>
         </div>
       </div>
     </section>
@@ -489,35 +552,35 @@ footer {
     <!-- ───────────── ABOUT ───────────── -->
     <section id="about">
       <div class="head">
-        <h2>About</h2>
-        <span class="label muted">Education, recognition, tools</span>
+        <h2 data-i="ab.h">About</h2>
+        <p class="say" data-i="ab.say">Two universities, three languages, and a habit of finishing things.</p>
       </div>
       <div class="cols">
         <div>
-          <h3 class="label muted">Education</h3>
+          <h3 class="label muted" data-i="ed.h">Education</h3>
           <ul class="plain">
-            <li><strong>BSc (Hons) Computer Science</strong><small>Asia Pacific University of Technology &amp; Innovation, Kuala Lumpur. 2024 to 2027, GPA 3.5</small></li>
-            <li><strong>Dual degree award</strong><small>De Montfort University, Leicester, UK</small></li>
-            <li><strong>Red Hat System Administration I (RH124)</strong><small>Red Hat, April 2025</small></li>
+            <li><strong data-i="ed1.t">BSc (Hons) Computer Science</strong><small data-i="ed1.s">Asia Pacific University of Technology &amp; Innovation, Kuala Lumpur. 2024 to 2027, GPA 3.5</small></li>
+            <li><strong data-i="ed2.t">Dual degree award</strong><small data-i="ed2.s">De Montfort University, Leicester, UK</small></li>
+            <li><strong>Red Hat System Administration I (RH124)</strong><small data-i="ed3.s">Red Hat, April 2025</small></li>
           </ul>
 
-          <h3 class="label muted stack-gap">Recognition</h3>
+          <h3 class="label muted stack-gap" data-i="rec.h">Recognition</h3>
           <ul class="plain">
-            <li><strong>1st runner-up, APU Startup Competition</strong><small>For EasyKaps, a customisable shortcut keyboard</small></li>
-            <li><strong>Top 10, National Physics Olympiad</strong><small>Mauritania, recognised at the national awards ceremony</small></li>
+            <li><strong data-i="r1.t">1st runner-up, APU Startup Competition</strong><small data-i="r1.s">For EasyKaps, a customisable shortcut keyboard</small></li>
+            <li><strong data-i="r2.t">Top 10, National Physics Olympiad</strong><small data-i="r2.s">Mauritania, recognised at the national awards ceremony</small></li>
           </ul>
         </div>
         <div>
-          <h3 class="label muted">Toolkit</h3>
+          <h3 class="label muted" data-i="kit.h">Toolkit</h3>
           <dl class="kit">
-            <div><dt class="label muted">Languages</dt><dd>TypeScript, JavaScript, Python, Java, SQL, C++, Solidity</dd></div>
-            <div><dt class="label muted">Web</dt><dd>Next.js, React, Tailwind CSS, FastAPI, Node.js</dd></div>
-            <div><dt class="label muted">Data</dt><dd>PostgreSQL, Supabase with row-level security, schema design and migrations</dd></div>
-            <div><dt class="label muted">AI</dt><dd>Claude API, Model Context Protocol, document extraction, agents that know when to escalate</dd></div>
-            <div><dt class="label muted">Payments</dt><dd>Stripe Checkout, Connect and webhooks</dd></div>
-            <div><dt class="label muted">Quality</dt><dd>pytest, Playwright, Hardhat tests, accessibility checks</dd></div>
-            <div><dt class="label muted">Ops</dt><dd>Linux, Vercel, Git, AWS basics</dd></div>
-            <div><dt class="label muted">Spoken</dt><dd>Arabic, English</dd></div>
+            <div><dt class="label muted" data-i="k1">Languages</dt><dd>TypeScript, JavaScript, Python, Java, SQL, C++, Solidity</dd></div>
+            <div><dt class="label muted" data-i="k2">Web</dt><dd>Next.js, React, Tailwind CSS, FastAPI, Node.js</dd></div>
+            <div><dt class="label muted" data-i="k3">Data</dt><dd data-i="k3v">PostgreSQL, Supabase with row-level security, schema design and migrations</dd></div>
+            <div><dt class="label muted" data-i="k4">AI</dt><dd data-i="k4v">Claude API, Model Context Protocol, document extraction, agents that know when to escalate</dd></div>
+            <div><dt class="label muted" data-i="k5">Payments</dt><dd data-i="k5v">Stripe Checkout, Connect and webhooks</dd></div>
+            <div><dt class="label muted" data-i="k6">Quality</dt><dd data-i="k6v">pytest, Playwright, Hardhat tests, accessibility checks</dd></div>
+            <div><dt class="label muted" data-i="k7">Ops</dt><dd data-i="k7v">Linux, Vercel, Git, AWS basics</dd></div>
+            <div><dt class="label muted" data-i="k8">Spoken</dt><dd data-i="k8v">Arabic, French, English</dd></div>
           </dl>
         </div>
       </div>
@@ -525,37 +588,202 @@ footer {
 
     <!-- ───────────── CONTACT ───────────── -->
     <section id="contact" class="contact">
-      <span class="label">Have something that needs building?</span>
-      <a class="big" href="mailto:sidimuhamed904@gmail.com">Write to me <i aria-hidden="true">↗</i></a>
+      <span class="label" data-i="c.q">Have something that needs building?</span>
+      <a class="big" href="mailto:sidimuhamed904@gmail.com"><span data-i="c.big">Write to me</span> <i aria-hidden="true">↗</i></a>
       <div class="links">
         <a href="mailto:sidimuhamed904@gmail.com">sidimuhamed904@gmail.com</a>
         <a href="https://www.linkedin.com/in/sidi-mohamed-sid-amine-1599942b5/">LinkedIn</a>
         <a href="https://github.com/sidim-prog">GitHub</a>
-        <a href="cv.pdf">One-page CV (PDF)</a>
+        <a href="cv.pdf" data-i="c.cv">One-page CV (PDF)</a>
       </div>
     </section>
   </main>
 
   <footer class="label">
-    <span>© 2026 Sidi Mohamed Sid Amine</span>
-    <span>Plain HTML and CSS. No framework, no tracking.</span>
+    <span dir="ltr">© 2026 Sidi Mohamed Sid Amine</span>
+    <span data-i="foot">Plain HTML and CSS. No framework, no tracking.</span>
   </footer>
 </div>
 
 <script>
-// Kuala Lumpur clock
-(function () {
-  var el = document.getElementById('clock');
-  if (!el || !window.Intl) return;
-  var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit' });
-  function tick() { el.textContent = 'Kuala Lumpur ' + fmt.format(new Date()) + ' MYT'; }
-  tick(); setInterval(tick, 20000);
-})();
+var T = {
+fr: {
+  "title": `Sidi Mohamed Sid Amine · Ingénieur logiciel, Kuala Lumpur`,
+  "city": `Kuala Lumpur`,
+  "bar": `Portfolio, 2026`,
+  "nav.work": `Projets`, "nav.exp": `Parcours`, "nav.about": `À propos`, "nav.contact": `Contact`, "nav.cv": `CV&nbsp;↓`,
+  "cap": `Ingénieur logiciel<br>Full-stack et IA appliquée`,
+  "hello": `Bonjour`,
+  "lede": `Je conçois des logiciels qui <em>servent vraiment.</em> Une startup de cybersécurité m'a recruté comme développeur web dès ma deuxième année d'université. Depuis, j'ai livré deux systèmes internes à un cabinet d'expertise en assurance, une place de marché avec traçabilité sur la blockchain, et un agent d'IA qui rapproche des relevés bancaires.`,
+  "f1k": `En ce moment`, "f1v": `Développeur web chez BarqSec`,
+  "f2k": `Études`, "f2v": `Licence en informatique, APU × De Montfort, dernière année`,
+  "f3k": `Basé à`, "f3v": `Kuala Lumpur, originaire de Mauritanie`,
+  "f4k": `Ouvert à`, "f4v": `Postes d'ingénieur logiciel`,
+  "b1": `produits réalisés de bout en bout depuis 2025`,
+  "b2": `systèmes internes livrés à C.S. Tang Adjusters`,
+  "b3n": `2<sup style="font-size:.5em;vertical-align:.72em;line-height:0">e</sup>`, "b3": `place au concours de startups de l'APU, avec EasyKaps`,
+  "b4n": `Top 10`, "b4": `Olympiades nationales de physique, Mauritanie`,
+  "work.h": `Projets`,
+  "work.say": `Systèmes pour des clients, produits personnels et projets de hackathon. Huit en tout, tous fonctionnels.`,
+  "l.part": `Mon rôle`, "l.built": `Technologies`, "l.see": `Voir`, "l.ctx": `Contexte`, "l.status": `Statut`, "l.role": `Poste`,
+  "v.live": `Site en ligne`, "v.src": `Code source`, "v.priv": `Dépôt privé`, "v.client": `Travail client, privé`,
+  "p1.tag": `Place de marché d'objets de luxe authentifiés, avec traçabilité sur la blockchain`,
+  "p1.d1": `Une place de marché pour montres, œuvres d'art et pièces de collection, où l'acheteur peut se fier à ce qu'il achète. Des vendeurs vérifiés publient leurs pièces et sont payés via Stripe Connect. Chaque annonce peut être émise sous forme de « jumeau numérique » ERC&#8209;721 : son historique de propriété et son contrôle d'authenticité sont inscrits sur Ethereum&nbsp;(Sepolia).`,
+  "p1.d2": `Acheteurs et vendeurs n'ont jamais à gérer de portefeuille : le serveur signe chaque écriture sur la chaîne, et l'application l'indique clairement quand la chaîne est injoignable au lieu de simuler un succès. Quatre rôles, quatorze tables, une sécurité au niveau des lignes sur chacune, et dix-huit tests de contrats au vert.`,
+  "p1.part": `Schéma Supabase et sécurité au niveau des lignes, authentification, déploiement. Équipe de quatre à l'APU.`,
+  "p2.tag": `Un agent d'IA qui rapproche les paiements internationaux, en montrant son raisonnement`,
+  "p2.d1": `Un justificatif de paiement de 10&nbsp;000&nbsp;USD peut apparaître sur un relevé bancaire malaisien sous la forme de 46&nbsp;802&nbsp;RM trois jours plus tard, après conversion, marge bancaire et frais. LedgerLens fait quand même le rapprochement. Il raisonne sur les taux de change, les modèles de frais, les décalages de règlement et les références de facture, et signale une ligne comme incertaine plutôt que de forcer une mauvaise correspondance.`,
+  "p2.d2": `Le moteur de rapprochement est déterministe et fonctionne hors ligne ; seules les lignes qu'il ne peut pas trancher sont transmises à Claude via sept outils MCP. Les montants sont traités en décimaux de bout en bout. Environ 160 tests, dont sept cas pièges conçus exprès.`,
+  "p2.ctx": `Conçu lors d'un hackathon d'IA, pour les PME malaisiennes.`,
+  "p3.tag": `Études, budget et démarches administratives au même endroit, pour les étudiants internationaux en Malaisie`,
+  "p3.d1": `Ici, un étudiant international jongle entre les échéances, un budget dans une devise étrangère et des papiers de visa qui expirent. NajmUni réunit les trois et indique la prochaine chose à faire. L'application fonctionne en anglais et en arabe, écriture de droite à gauche comprise.`,
+  "p3.d2": `Elle lit les documents et relevés bancaires importés, rédige les e-mails qu'on aurait remis à plus tard et envoie un bilan hebdomadaire. Chaque service externe est facultatif : sans aucune clé, elle bascule sur une base de données embarquée et une connexion locale, si bien que tout le produit tourne sur un simple ordinateur portable.`,
+  "p3.status": `En développement. Je l'ai lancé parce que je suis l'un de ces étudiants.`,
+  "p4.t": `Gestion des sinistres`,
+  "p4.tag": `L'outil interne de gestion des sinistres de C.S. Tang Adjusters`,
+  "p4.d1": `Un système interne pour un cabinet d'expertise en sinistres automobiles. Le personnel se connecte, voit l'état de chaque dossier ouvert sur un tableau de bord, recherche et filtre la liste complète par État, assureur ou expert, et exporte le résultat vers Excel.`,
+  "p4.d2": `Les nouveaux dossiers sont saisis via un formulaire en trois étapes : sinistre, véhicule, première évaluation. Chaque dossier comporte des onglets pour les données financières et les documents, avec copie en un clic du chemin réseau où se trouvent les fichiers.`,
+  "p4.ctx": `Réalisé pendant mon stage d'ingénieur logiciel.`,
+  "p5.tag": `Six ans de données de sinistres, collectées, nettoyées et rendues lisibles`,
+  "p5.d1": `Le volet analytique du même cabinet. Un pipeline Python collecte les dossiers de sinistres avec Playwright, les nettoie et les charge dans Supabase. Un tableau de bord s'appuie dessus : sinistres de 2021 à 2026, performance des réparateurs agréés et tarifs concessionnaires des pièces de moto.`,
+  "p5.d2": `Le personnel peut aussi importer une feuille de calcul et l'interroger en langage courant.`,
+  "p5.ctx": `Deuxième projet du stage chez C.S. Tang.`,
+  "p6.tag": `Site web d'une startup de cybersécurité`,
+  "p6.d1": `Mon poste actuel. Je développe et maintiens le site et les interfaces web de BarqSec, et je gère la base de données de la plateforme.`,
+  "p6.role": `Développeur web`,
+  "p7.tag": `Des failles de sécurité mises en graphiques en une nuit, à la Nuit de l'Info`,
+  "p7.d1": `La Nuit de l'Info est une nuit de programmation française qui dure du coucher au lever du soleil. Le projet récupère les fiches CVE publiées depuis une API publique et les transforme en quelque chose que l'on peut parcourir et lire d'un coup d'œil.`,
+  "p7.ctx": `Hackathon d'une nuit`,
+  "p8.t": `OWSB, bons de commande`,
+  "p8.tag": `Un logiciel de bureau de gestion des achats, multi-rôles, en Java`,
+  "p8.d1": `Demandes d'achat, bons de commande, fournisseurs, stocks et rapports de ventes pour une entreprise de vente en gros, avec une vue et des permissions propres à chaque rôle, et une étape de validation avant l'envoi d'une commande. Le projet où la conception orientée objet a cessé d'être théorique pour moi.`,
+  "p8.ctx": `Projet universitaire, APU`,
+  "fun": `Et pour le plaisir : <a href="https://github.com/sidim-prog/gamenight">The Last Masquerade</a>, un serveur Node sans aucune dépendance qui attribue à chaque invité d'une soirée enquête un personnage secret lorsqu'il scanne un QR code.`,
+  "exp.h": `Parcours`,
+  "exp.say": `Développeur en poste depuis ma deuxième année d'université.`,
+  "e1.when": `Nov. 2025 à aujourd'hui`, "e1.t": `Développeur web`,
+  "e1.d": `Développement du site et des interfaces web d'une startup de cybersécurité avec Next.js et TypeScript, et gestion de la base de données de la plateforme.`,
+  "e2.when": `Janv. à avr. 2026`, "e2.t": `Ingénieur logiciel, stagiaire`,
+  "e2.d": `Réalisation du système interne de gestion des sinistres du cabinet, puis d'un pipeline de données et d'un tableau de bord couvrant six ans de sinistres, la performance des réparateurs et les prix des pièces.`,
+  "e3.when": `Juil. 2024 à janv. 2026`, "e3.t": `Tuteur de mathématiques`,
+  "e3.d": `Animation de séances de résolution de problèmes en analyse et en algèbre pour d'autres étudiants de licence. Un bon entraînement pour expliquer une notion difficile de trois façons différentes.`,
+  "ab.h": `À propos`,
+  "ab.say": `Deux universités, trois langues, et l'habitude d'aller au bout des choses.`,
+  "ed.h": `Formation`,
+  "ed1.t": `Licence (BSc Hons) en informatique`,
+  "ed1.s": `Asia Pacific University of Technology &amp; Innovation, Kuala Lumpur. 2024 à 2027, moyenne (GPA) de 3,5`,
+  "ed2.t": `Double diplôme`, "ed2.s": `De Montfort University, Leicester, Royaume-Uni`,
+  "ed3.s": `Red Hat, avril 2025`,
+  "rec.h": `Distinctions`,
+  "r1.t": `2ᵉ place, concours de startups de l'APU`, "r1.s": `Pour EasyKaps, un clavier de raccourcis personnalisable`,
+  "r2.t": `Top 10, Olympiades nationales de physique`, "r2.s": `Mauritanie, distingué lors de la cérémonie nationale de remise des prix`,
+  "kit.h": `Outils`,
+  "k1": `Langages`, "k2": `Web`, "k3": `Données`, "k4": `IA`, "k5": `Paiements`, "k6": `Qualité`, "k7": `Ops`, "k8": `Langues`,
+  "k3v": `PostgreSQL, Supabase avec sécurité au niveau des lignes, conception de schémas et migrations`,
+  "k4v": `API Claude, Model Context Protocol, extraction de documents, agents qui savent quand passer la main`,
+  "k5v": `Stripe Checkout, Connect et webhooks`,
+  "k6v": `pytest, Playwright, tests Hardhat, contrôles d'accessibilité`,
+  "k7v": `Linux, Vercel, Git, bases d'AWS`,
+  "k8v": `Arabe, français, anglais`,
+  "c.q": `Un projet à réaliser ?`,
+  "c.big": `Écrivez-moi`,
+  "c.cv": `CV d'une page (PDF, en anglais)`,
+  "foot": `HTML et CSS, tout simplement. Ni framework, ni pistage.`
+},
+ar: {
+  "title": `Sidi Mohamed Sid Amine · مهندس برمجيات، كوالالمبور`,
+  "city": `كوالالمبور`,
+  "bar": `معرض الأعمال، 2026`,
+  "nav.work": `الأعمال`, "nav.exp": `الخبرة`, "nav.about": `نبذة`, "nav.contact": `تواصل`, "nav.cv": `السيرة&nbsp;↓`,
+  "cap": `مهندس برمجيات<br>تطوير متكامل وذكاء اصطناعي تطبيقي`,
+  "hello": `مرحبًا`,
+  "lede": `أبني برمجيات <em>تُستخدم فعلًا.</em> وظّفتني شركة ناشئة في الأمن السيبراني مطوّرًا للويب وأنا في سنتي الجامعية الثانية. ومنذ ذلك الحين سلّمتُ نظامين داخليين لمكتب خبرة في تسوية مطالبات التأمين، وسوقًا إلكترونية بسجل ملكية على البلوك تشين، ووكيل ذكاء اصطناعي يطابق كشوف الحسابات المصرفية.`,
+  "f1k": `حاليًا`, "f1v": `مطوّر ويب في BarqSec`,
+  "f2k": `الدراسة`, "f2v": `بكالوريوس علوم الحاسوب، APU × De Montfort، السنة الأخيرة`,
+  "f3k": `الإقامة`, "f3v": `كوالالمبور، من موريتانيا`,
+  "f4k": `متاح لـ`, "f4v": `وظائف هندسة البرمجيات`,
+  "b1": `منتجات بنيتُها من البداية إلى النهاية منذ 2025`,
+  "b2": `نظامان داخليان سلّمتُهما لشركة C.S. Tang Adjusters`,
+  "b3n": `الثاني`, "b3": `المركز الثاني في مسابقة الشركات الناشئة بجامعة APU، بمشروع EasyKaps`,
+  "b4n": `أفضل 10`, "b4": `الأولمبياد الوطني للفيزياء، موريتانيا`,
+  "work.h": `الأعمال`,
+  "work.say": `أنظمة لعملاء، ومنتجات خاصة، ومشاريع هاكاثون. ثمانية أعمال، كلها تعمل.`,
+  "l.part": `دوري`, "l.built": `التقنيات`, "l.see": `المعاينة`, "l.ctx": `السياق`, "l.status": `الحالة`, "l.role": `المنصب`,
+  "v.live": `الموقع المباشر`, "v.src": `الشيفرة المصدرية`, "v.priv": `مستودع خاص`, "v.client": `عمل لعميل، خاص`,
+  "p1.tag": `سوق إلكترونية للسلع الفاخرة الموثّقة، مع سجل ملكية على البلوك تشين`,
+  "p1.d1": `سوق للساعات والأعمال الفنية والمقتنيات النادرة يثق فيها المشتري بما يشتريه. بائعون موثَّقون يعرضون قطعهم ويستلمون مستحقاتهم عبر Stripe Connect. ويمكن إصدار كل قطعة على هيئة «توأم رقمي» بمعيار ERC&#8209;721، فيُسجَّل تاريخ ملكيتها والتحقق من أصالتها على شبكة إيثيريوم (Sepolia).`,
+  "p1.d2": `لا يحتاج المشتري ولا البائع إلى محفظة رقمية: الخادم يوقّع كل عملية كتابة على السلسلة، والتطبيق يصرّح بوضوح عند تعذّر الوصول إلى الشبكة بدل أن يوهم بالنجاح. أربعة أدوار، أربعة عشر جدولًا، حماية على مستوى الصفوف في كل جدول، وثمانية عشر اختبارًا ناجحًا للعقود الذكية.`,
+  "p1.part": `مخطط قاعدة البيانات في Supabase وحماية الصفوف، والمصادقة، والنشر. فريق من أربعة في جامعة APU.`,
+  "p2.tag": `وكيل ذكاء اصطناعي يطابق المدفوعات العابرة للحدود، ويبيّن طريقة استنتاجه`,
+  "p2.d1": `إثبات دفع بقيمة 10,000 دولار أمريكي قد يظهر في كشف حساب مصرفي ماليزي على أنه 46,802 رينغيت بعد ثلاثة أيام، بعد التحويل وهامش البنك والرسوم. ومع ذلك يطابق LedgerLens بينهما. فهو يحلّل أسعار الصرف ونماذج الرسوم وفروق تواريخ التسوية ومراجع الفواتير، ويشير إلى السطر غير المؤكد بدل أن يفرض مطابقة خاطئة.`,
+  "p2.d2": `محرّك المطابقة حتمي ويعمل دون اتصال بالإنترنت، ولا تُحال إلى Claude سوى الأسطر التي يعجز عن حسمها، عبر سبع أدوات MCP. تُعالَج المبالغ بأرقام عشرية دقيقة في كل المراحل. نحو 160 اختبارًا، منها سبع حالات صُمّمت كفخاخ.`,
+  "p2.ctx": `أُنجز في هاكاثون للذكاء الاصطناعي، وموجّه للشركات الصغيرة والمتوسطة في ماليزيا.`,
+  "p3.tag": `الدراسة والمال والمعاملات في مكان واحد، للطلاب الدوليين في ماليزيا`,
+  "p3.d1": `الطالب الدولي هنا يوازن بين مواعيد التسليم، وميزانية بعملة أجنبية، وأوراق تأشيرة تنتهي صلاحيتها. يجمع NajmUni هذه الثلاثة ويخبرك بالخطوة التالية. يعمل بالإنجليزية والعربية، مع دعم كامل للكتابة من اليمين إلى اليسار.`,
+  "p3.d2": `يقرأ المستندات وكشوف الحسابات المرفوعة، ويصوغ الرسائل التي كنت ستؤجّلها، ويرسل مراجعة أسبوعية. كل خدمة خارجية اختيارية: من دون أي مفاتيح يتحوّل إلى قاعدة بيانات مضمّنة وتسجيل دخول محلي، فيعمل المنتج كاملًا على حاسوب محمول.`,
+  "p3.status": `قيد التطوير. بدأتُه لأنني واحد من هؤلاء الطلاب.`,
+  "p4.t": `نظام إدارة المطالبات`,
+  "p4.tag": `الأداة الداخلية لإدارة المطالبات في C.S. Tang Adjusters`,
+  "p4.d1": `نظام داخلي لمكتب خبرة في تسوية مطالبات تأمين السيارات. يسجّل الموظفون دخولهم، ويتابعون حالة كل مطالبة مفتوحة على لوحة معلومات، ويبحثون في القائمة الكاملة ويفرزونها حسب الولاية أو شركة التأمين أو الخبير، ثم يصدّرون النتائج إلى Excel.`,
+  "p4.d2": `تُدخَل المطالبات الجديدة عبر نموذج من ثلاث خطوات: المطالبة، ثم المركبة، ثم التقييم الأولي. ولكل ملف تبويبات للبيانات المالية والمستندات، مع نسخ مسار الشبكة الذي تُحفظ فيه الملفات بنقرة واحدة.`,
+  "p4.ctx": `أنجزتُه خلال تدريبي كمهندس برمجيات.`,
+  "p5.tag": `ست سنوات من بيانات المطالبات، جُمعت ونُقّحت وصارت مقروءة`,
+  "p5.d1": `الجانب التحليلي للمكتب نفسه. مسار بيانات مكتوب بلغة Python يجمع سجلات المطالبات باستخدام Playwright، وينقّحها، ثم يحمّلها إلى Supabase. وفوقه لوحة معلومات تعرض مطالبات الأعوام من 2021 إلى 2026، وأداء ورش الإصلاح المعتمدة، وقوائم أسعار الوكلاء لقطع غيار الدراجات النارية.`,
+  "p5.d2": `ويستطيع الموظفون أيضًا رفع جدول بيانات وطرح أسئلتهم عليه بلغة عادية.`,
+  "p5.ctx": `المشروع الثاني من تدريبي في C.S. Tang.`,
+  "p6.tag": `موقع إلكتروني لشركة ناشئة في الأمن السيبراني`,
+  "p6.d1": `عملي الحالي. أبني موقع BarqSec وواجهاته على الويب وأتولّى صيانتها، وأدير قاعدة البيانات التي تقوم عليها المنصة.`,
+  "p6.role": `مطوّر ويب`,
+  "p7.tag": `ثغرات أمنية في رسوم بيانية، أُنجزت في ليلة واحدة خلال Nuit de l'Info`,
+  "p7.d1": `«Nuit de l'Info» ليلة برمجة فرنسية تمتد من غروب الشمس إلى شروقها. يجلب المشروع سجلات CVE المنشورة من واجهة برمجية عامة ويحوّلها إلى عرض يمكن تصفّحه وقراءته بنظرة واحدة.`,
+  "p7.ctx": `هاكاثون ليلي`,
+  "p8.t": `OWSB لأوامر الشراء`,
+  "p8.tag": `نظام مكتبي لإدارة المشتريات متعدد الأدوار، بلغة Java`,
+  "p8.d1": `طلبات الشراء وأوامر الشراء والمورّدون والمخزون وتقارير المبيعات لشركة بيع بالجملة، مع واجهة وصلاحيات خاصة بكل دور، وخطوة اعتماد قبل إرسال أي طلب. هو المشروع الذي لم يعد فيه التصميم الكائني التوجّه مجرد نظرية بالنسبة إليّ.`,
+  "p8.ctx": `مشروع جامعي، APU`,
+  "fun": `وللمتعة أيضًا: <a href="https://github.com/sidim-prog/gamenight">The Last Masquerade</a>، خادم Node بلا أي اعتماديات يمنح كل ضيف في سهرة لغز جريمة شخصية سرّية عند مسح رمز QR.`,
+  "exp.h": `الخبرة`,
+  "exp.say": `أعمل مطوّرًا منذ سنتي الجامعية الثانية.`,
+  "e1.when": `نوفمبر 2025 حتى الآن`, "e1.t": `مطوّر ويب`,
+  "e1.d": `أبني الموقع وواجهات الويب لشركة ناشئة في الأمن السيبراني باستخدام Next.js وTypeScript، وأدير قاعدة البيانات التي تقوم عليها المنصة.`,
+  "e2.when": `يناير – أبريل 2026`, "e2.t": `مهندس برمجيات، متدرب`,
+  "e2.d": `بنيتُ النظام الداخلي لإدارة المطالبات في المكتب، ثم مسار بيانات ولوحة معلومات تغطي ست سنوات من المطالبات وأداء ورش الإصلاح وأسعار قطع الغيار.`,
+  "e3.when": `يوليو 2024 – يناير 2026`, "e3.t": `مدرّس مساعد للرياضيات`,
+  "e3.d": `قدّمتُ حصص حل مسائل في التفاضل والتكامل والجبر لزملائي من طلاب البكالوريوس. تمرين جيد على شرح الفكرة الصعبة بثلاث طرق مختلفة.`,
+  "ab.h": `نبذة`,
+  "ab.say": `جامعتان، وثلاث لغات، وعادة إتمام ما أبدأ.`,
+  "ed.h": `التعليم`,
+  "ed1.t": `بكالوريوس (مع مرتبة الشرف) في علوم الحاسوب`,
+  "ed1.s": `جامعة آسيا والمحيط الهادئ للتكنولوجيا والابتكار (APU)، كوالالمبور. من 2024 إلى 2027، المعدل التراكمي 3.5`,
+  "ed2.t": `شهادة مزدوجة`, "ed2.s": `جامعة دي مونتفورت، ليستر، المملكة المتحدة`,
+  "ed3.s": `Red Hat، أبريل 2025`,
+  "rec.h": `التكريمات`,
+  "r1.t": `المركز الثاني، مسابقة الشركات الناشئة في APU`, "r1.s": `عن EasyKaps، لوحة مفاتيح اختصارات قابلة للتخصيص`,
+  "r2.t": `ضمن العشرة الأوائل، الأولمبياد الوطني للفيزياء`, "r2.s": `موريتانيا، مع تكريم في حفل الجوائز الوطني`,
+  "kit.h": `الأدوات`,
+  "k1": `لغات البرمجة`, "k2": `الويب`, "k3": `البيانات`, "k4": `الذكاء الاصطناعي`, "k5": `المدفوعات`, "k6": `الجودة`, "k7": `التشغيل`, "k8": `اللغات`,
+  "k3v": `PostgreSQL، وSupabase مع حماية على مستوى الصفوف، وتصميم المخططات والترحيلات`,
+  "k4v": `Claude API، وModel Context Protocol، واستخراج البيانات من المستندات، ووكلاء يعرفون متى يحيلون القرار`,
+  "k5v": `Stripe Checkout وConnect وwebhooks`,
+  "k6v": `pytest، وPlaywright، واختبارات Hardhat، وفحوص إمكانية الوصول`,
+  "k7v": `Linux، وVercel، وGit، وأساسيات AWS`,
+  "k8v": `العربية، الفرنسية، الإنجليزية`,
+  "c.q": `لديك مشروع يحتاج إلى من يبنيه؟`,
+  "c.big": `راسلني`,
+  "c.cv": `السيرة الذاتية في صفحة واحدة (PDF، بالإنجليزية)`,
+  "foot": `صفحة مكتوبة بلغتي HTML وCSS فقط. بلا إطار عمل ولا تتبّع.`
+}
+};
 
-// Fit the first line of the name to the full column width
 (function () {
+  var root = document.documentElement, wrap = document.getElementById('wrap');
+  var nodes = [].slice.call(document.querySelectorAll('[data-i]'));
+  var EN = { title: document.title, city: 'Kuala Lumpur' };
+  nodes.forEach(function (n) { n._en = n.innerHTML; });
+  var lang = 'en';
+
+  // name: fit the first line to the full column width
   var h = document.getElementById('name'), line = document.getElementById('name-1');
-  if (!h || !line) return;
   function fit() {
     h.style.fontSize = '';
     var probe = document.createElement('span');
@@ -565,9 +793,48 @@ footer {
     var size = parseFloat(getComputedStyle(h).fontSize);
     var w = probe.getBoundingClientRect().width, target = h.getBoundingClientRect().width;
     line.textContent = probe.textContent;
-    if (w > 0 && target > 0) h.style.fontSize = (size * target / w * 0.995) + 'px';
+    if (w > 0 && target > 0) {
+      var px = size * target / w * 0.995;
+      h.style.fontSize = px + 'px';
+      wrap.style.setProperty('--ns', px + 'px');
+    }
   }
-  fit();
+
+  // Kuala Lumpur clock
+  var clock = document.getElementById('clock'), fmt = null;
+  try { fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit' }); } catch (e) {}
+  function tick() {
+    var city = lang === 'en' ? EN.city : T[lang].city;
+    clock.textContent = fmt ? city + ' ' + fmt.format(new Date()) + (lang === 'en' ? ' MYT' : '') : city;
+  }
+
+  function setLang(l, save) {
+    if (l !== 'en' && !T[l]) l = 'en';
+    lang = l;
+    root.lang = l; root.dir = l === 'ar' ? 'rtl' : 'ltr';
+    nodes.forEach(function (n) {
+      var k = n.getAttribute('data-i');
+      n.innerHTML = (l !== 'en' && T[l][k] != null) ? T[l][k] : n._en;
+    });
+    document.title = l === 'en' ? EN.title : T[l].title;
+    [].forEach.call(document.querySelectorAll('.langs button'), function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-l') === l ? 'true' : 'false');
+    });
+    tick(); fit();
+    if (save) { try { localStorage.setItem('lang', l); } catch (e) {} }
+  }
+
+  [].forEach.call(document.querySelectorAll('.langs button'), function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-l'), true); });
+  });
+
+  var start = null;
+  try { start = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (!start) { try { start = localStorage.getItem('lang'); } catch (e) {} }
+  if (!start) { var nl = (navigator.language || 'en').slice(0, 2).toLowerCase(); if (nl === 'fr' || nl === 'ar') start = nl; }
+  setLang(start || 'en', false);
+
+  setInterval(tick, 20000);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 80); });
 })();
