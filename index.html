@@ -104,8 +104,6 @@ p:last-child { margin-bottom: 0; }
   mix-blend-mode: screen;
 }
 .portrait .ph::after { content: ""; position: absolute; inset: 0; background: var(--paper); mix-blend-mode: multiply; pointer-events: none; }
-.portrait:hover img { filter: none; mix-blend-mode: normal; }
-.portrait:hover .ph::after { opacity: 0; }
 .portrait figcaption { padding: 8px 10px 9px; background: var(--accent); color: var(--paper); line-height: 1.35; }
 
 .intro {
@@ -295,6 +293,46 @@ footer {
   * { transition: none !important; }
 }
 @media print { .bar nav, .langs, .contact .big i { display: none; } }
+
+/* ── v3 polish ─────────────────────────────── */
+.bar { position: sticky; top: 0; z-index: 10; background: var(--paper); }
+
+.portrait { width: 24cqw; }
+.portrait::before { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid var(--ink); transform: translate(-12px, 12px); pointer-events: none; }
+:root[dir="rtl"] .portrait::before { transform: translate(12px, 12px); }
+.portrait .ph { display: block; width: 100%; padding: 0; border: 0; border-radius: 0; font: inherit; cursor: pointer; position: relative; background: var(--accent); overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.portrait .ph::after { content: none; }
+.portrait img { filter: none; mix-blend-mode: normal; }
+.portrait .duo { position: absolute; inset: 0; background: var(--accent); isolation: isolate; transition: opacity .7s ease; }
+.portrait .duo img { height: 100%; filter: grayscale(1) contrast(1.25) brightness(1.08); mix-blend-mode: screen; }
+.portrait .duo::after { content: ""; position: absolute; inset: 0; background: var(--paper); mix-blend-mode: multiply; }
+@media (hover: hover) { .portrait .ph:hover .duo { opacity: 0; } }
+.portrait.is-color .duo { opacity: 0; }
+.intro { min-height: 22cqw; }
+
+main { counter-reset: sec; }
+.head { counter-increment: sec; }
+.head h2::before { content: "0" counter(sec); display: block; margin-bottom: 12px; font-size: 12.5px; font-weight: 600; font-stretch: 100%; letter-spacing: .09em; line-height: 1; color: var(--accent); }
+
+.work details[open] > summary .title { color: var(--accent); }
+@media (hover: hover) { .work details[open] > summary:hover .title { color: var(--paper); } }
+
+.contact { border-top: 0; background: var(--ink); color: var(--paper); padding: clamp(22px, 3.4cqw, 56px) clamp(18px, 3cqw, 48px) clamp(26px, 3.6cqw, 60px); }
+.contact .label { color: #b9b3a4; }
+.contact .big { color: var(--paper); }
+.contact .big:hover, .contact a:hover { color: #9aa8ff; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(14%); } to { opacity: 1; transform: none; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+.name > span { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
+.name > span + span { animation-delay: .09s; }
+.portrait { animation: fadein .9s ease .35s both; }
+
+@media (max-width: 900px) {
+  .portrait { width: 62%; margin-bottom: 26px; position: relative; }
+  .intro { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .name > span, .portrait { animation: none; } }
 </style>
 </head>
 <body>
@@ -325,7 +363,7 @@ footer {
       </h1>
 
       <figure class="portrait">
-        <div class="ph"><img src="sidi.jpg" width="520" height="650" alt="Portrait of Sidi Mohamed Sid Amine"></div>
+        <button type="button" class="ph" id="ph" aria-pressed="false" aria-label="Portrait of Sidi Mohamed Sid Amine. Press to show it in colour."><img src="sidi.jpg" width="520" height="650" alt=""><span class="duo" aria-hidden="true"><img src="sidi.jpg" width="520" height="650" alt=""></span></button>
         <figcaption class="label" data-i="cap">Software engineer<br>Full-stack &amp; applied AI</figcaption>
       </figure>
 
@@ -826,6 +864,12 @@ ar: {
 
   [].forEach.call(document.querySelectorAll('.langs button'), function (b) {
     b.addEventListener('click', function () { setLang(b.getAttribute('data-l'), true); });
+  });
+
+  var fig = document.querySelector(".portrait"), ph = document.getElementById("ph");
+  ph.addEventListener("click", function () {
+    var on = fig.classList.toggle("is-color");
+    ph.setAttribute("aria-pressed", on ? "true" : "false");
   });
 
   var start = null;
